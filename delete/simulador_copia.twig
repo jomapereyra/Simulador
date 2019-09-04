@@ -1,0 +1,80 @@
+{% extends "base.twig" %}
+
+{% block head %}
+
+    {{ parent() }}
+
+    <link href="css/content.css" rel="stylesheet" type="text/css"/>
+    <link href="css/nav.css" rel="stylesheet" type="text/css"/>
+    <link href="css/scrambled-list.css" rel="stylesheet" type="text/css"/>
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="col s12">
+
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12 center-align breadcrumb_ssettings" id="breadcrumb_simulador">
+                    <a class="breadcrumb font_breadcrumb_big">Autoanálisis</a>
+                </div>
+            </div>
+        </nav>
+
+        <div id="simulador">
+
+            {# Contenido de cada panel/etapa del simulador #}
+
+            <div class="card-panel teal lighten-2 margin_simulador" id="panel_simulador">
+                <div class="contenido_panel">
+                    {% include "autoanalisis.twig" %}
+                </div>
+            </div>
+
+            {# Botones para desplazarse #}
+
+            <div class="center-align">
+                <a class="btn waves-effect white grey-text darken-text-2" id="prev">Anterior</a>
+                <a class="btn waves-effect white grey-text darken-text-2" id="next">Siguiente</a>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    {# {{ parent() }} #}
+
+    {# JavaScript al final del body para obtimizar las cargas #}
+
+    {# JavaScript de Jquery #}
+    {# <script src="js/jquery-3.3.1.min.js" type="text/javascript"> </script> #}
+
+    {# Aca vamos agregando los scrits que se necesitan #}
+    <script src="js/exe_jquery.js" type="text/javascript"> </script>
+    <script src="js/common_i18n.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/scrambled-list.js" type="text/javascript"></script>
+    <script src="js/_style_js.js" type="text/javascript"></script>
+
+    {# JavaScript de Materialize #}
+    <script src="js/materialize.min.js" type="text/javascript"></script>
+
+    {# Activa el SideNav de Materialize #}
+    <script src="js/navegacion.js" type="text/javascript"></script>
+
+
+    {# Opcion imprimir #}
+    <script src="js/imprimir.js" type="text/javascript"></script>
+
+    {# Modal #}
+    <script src="js/modal.js" type="text/javascript"></script>
+
+    {# Simulador #}
+    <script src="js/simulador.js" type="text/javascript"></script>
+
+{% endblock %}

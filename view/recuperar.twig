@@ -1,0 +1,70 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    {# Encabezado Formulario #}
+
+    <div class="row">
+
+        <div class="col s12">
+            <div class="center-align">
+                <h3>Recuperar contraseña</h3>
+            </div>
+        </div>
+
+    </div>
+
+    {# Formulario #}
+
+    <div class="row">
+
+        <div class="col s12 m8 l4 offset-m2 offset-l4">
+
+            <div class="card-panel blue lighten-4 z-depth-3">
+
+                <div class="row">
+                    <h5 class="center-align light-blue-text text-darken-4 bold">Ingrese su correo para solicitar un cambio de contraseña</h5>
+                </div>
+
+                <form id="formulario_recuperar" onsubmit="return validar_recuperar();">
+
+                    <div class="row">
+
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">mail</i>
+                            <input class="validate" data-hidden="correo" id="correo" name="correo" type="text">
+                            <label for="correo">Correo</label>
+                            <span class="helper-text">El correo debe ser el correspondiente a su cuenta</span>
+                            <span class="helper-text red-text text-lighten-2 error" id="correo_error"></span>
+                        </div>
+
+                        <div class="input-field col s12 ocultar" id="error"></div>
+
+                        <div class="input-field col s12">
+                            <div class="right-align">
+                                <button id="recuperar_button" class="btn waves-effect waves-light" name="submit" type="submit">
+                                        Solicitar<i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+
+    {{ parent() }}
+
+    {# Validaciones #}
+    <script type="text/javascript" src="js/recuperar.js"></script>
+
+{% endblock %}

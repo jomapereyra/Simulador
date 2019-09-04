@@ -1,0 +1,228 @@
+.ocultar{
+    display:none;
+    margin:0px;
+}
+
+.discovery-content{
+    border-radius: 0px !important;
+
+}
+
+.formulario-chico-modal{
+    height: 500px;
+}
+
+.fondo{
+    background-color:#ffffff !important;
+}
+
+.title-header{
+    padding-left: 30px !important;
+}
+
+.title_data{
+    margin-left: 22px;
+    margin-bottom: 30px;
+}
+
+.altura_panel{
+    height: 1700px !important;
+}
+
+
+
+.contenido_panel{
+    display:block;
+    height:auto;
+    overflow:visible;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+
+.btn_settings{
+    line-height: 0px !important;
+}
+
+.tamaño_img_opciones{
+    width: -webkit-fill-available;
+    width: -moz-available;
+}
+
+.parche_vof{
+    float: none !important;
+}
+
+
+
+.altura_500{
+    height: 500px;
+}
+
+.margin-right_30{
+    margin-right: 30px !important;
+}
+
+.sin_margin{
+    margin: 0px !important;
+}
+
+.margin_autoevaluacion{
+    margin-top: 0px;
+}
+
+.margin_20{
+    margin: 20px;
+}
+
+.margin_nav{
+    margin-left: 20px;
+}
+
+.padding-left_30{
+    padding-left: 30px !important;
+}
+
+.h-margin{
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.oscurecer{
+    background-color: rgba(0, 0, 0, 0.23);
+}
+
+
+
+.error{
+    display:none;
+    font-size: 14px !important;
+}
+
+.boton_input{
+    padding-left: 0px !important;
+    padding-top: 5px !important;
+}
+
+.info{
+    color:rgb(62, 77, 152)!important;
+    font-size: 15px;
+}
+
+/********************* Cuerpo Pagina ***********************************************/
+
+main{
+    padding-top: 20px;
+    min-height: 500px;
+    padding-bottom: 20px;
+}
+
+.title_margin{
+    margin-top: 10px !important;
+    margin-bottom: 30px !important;
+}
+
+.article_margin{
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+.texto_page{
+    font-size: 20px;
+}
+
+/************************************************************************************/
+
+/********************* Configuracion Responsive **************************************/
+
+@media only screen and (max-width : 992px) {
+    #encabezado, main, footer {
+      padding-left: 0 !important;
+    }
+}
+
+@media only screen and (max-width : 700px) {
+    .sidenav {
+      width: 100%;
+    }
+    .title-header{
+        display: none;
+    }
+
+    .icon-header{
+        margin: auto !important;
+        text-align: center;
+    }
+}
+
+/************************************************************************************/
+
+/***************************** Accesibilidad Web ***********************************/
+
+fieldset { border:0px }
+
+input:focus, a:focus, button:focus, select:focus, span:focus{
+    outline: 2px solid rgb(221, 102, 66) !important;
+    background-color: coral !important;
+}
+
+.tab a:focus{
+    color:white !important;
+}
+
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/*******************************************************************************/
+
+/************************ Autoevaluacion *****************************************/
+
+/*********************** Rellenar **************************************/
+
+.rellenar_correcto{
+    background-color: rgb(204, 255, 153) !important;
+}
+
+.rellenar_incorrecto{
+    background-color: rgb(243, 97, 97) !important;
+}
+
+
+/********************* Mapa de la Autoevaluacion **********************************/
+
+.etapa_actual{
+    color:#ffffff !important;
+    font-weight: bold;
+}
+
+.breadcrumb_settings{
+    background-color: #ee6e73;
+    margin-bottom: 20px;
+}
+
+.font_breadcrumb_small{
+    font-size:15px !important;
+}
+
+.font_breadcrumb_big{
+    font-size:24px !important;
+}
+
+.etapa_actual.font_breadcrumb_small{
+    font-size:18px !important;
+}
+
+.etapa_actual.font_breadcrumb_big{
+    font-size:27px !important;
+}
+
+
+
+
+/****************************************************************************/

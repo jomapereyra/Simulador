@@ -1,0 +1,48 @@
+{% extends "base_usuario.twig" %}
+
+{% block content %}
+
+    <section class="col s10 offset-s1">
+
+        <h4 class="title_margin accesible" tabindex="6">Configuraciones</h4>
+
+        <div class="row">
+            <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                <li class="tab">
+                    <a class="accesible" href="#mis_datos">Mis Datos</a>
+                </li>
+                <li class="tab">
+                    <a class="accesible" href="#editar">Editar</a>
+                </li>
+                <li class="tab">
+                    <a class="accesible" href="#seguridad">Seguridad</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div id="mis_datos" class="col s12">
+            {% include "mis_datos.twig" %}
+        </div>
+        <div id="editar" class="col s12">
+            {% include "editar.twig" %}
+        </div>
+        <div id="seguridad" class="col s12">
+            {% include "seguridad.twig" %}
+            {% include "codigo_seguridad.twig" %}
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block js %}
+
+    {{ parent() }}
+
+    {# Editar Perfil #}
+    <script src="js/editar.js" type="text/javascript"></script>
+
+    {# Seguridad - Cambio de contraseña #}
+    <script src="js/seguridad.js" type="text/javascript"></script>
+
+{% endblock %}

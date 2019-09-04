@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es-AR" data-country="AR">
+
+    <head>
+
+        {% block head %}
+
+            <meta
+            charset="UTF-8">
+
+            {# Info autora del sitio #}
+            <meta
+            content="Simulador Nelba Q" name="author"/>
+
+            {# Info del sitio #}
+            <meta
+            content="Curso para personas con pérdida auditiva que utilizan prótesis auditivas ( audífonos e implantes cocleares) en el que se les brindará las herramientas comunicacionales necesarias para  presentarse a una entrevista laboral ." name="description"/>
+
+            {# Licencia de Creative Commons #}
+            <link
+            href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" type="text/html"/>
+
+            {# icono del sitio #}
+            <link
+            href="img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+
+            {# Paquete de iconos - Google Icon Font #}
+            <link
+            href="css/icons.css" rel="stylesheet">
+
+            {# Utilizo los estilos de Materialize #}
+            <link
+            href="css/materialize.min.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+
+            {# Utilizo mis estilos #}
+            <link
+            href="css/mis_estilos.css" rel="stylesheet" type="text/css"/>
+
+            {# Optimizado para celulares #}
+            <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+            <meta
+            content="ie=edge" http-equiv="X-UA-Compatible">
+
+            {# Titulo de la pagina #}
+            <title>Simulador |
+                {% block title %}
+                    {{name}}
+                {% endblock %}
+            </title>
+
+        {% endblock %}
+
+    </head>
+
+    <body>
+
+        {% include "header.twig" %}
+
+        {% if not_activate == true %}
+
+            <div class="row sin_margin">
+
+                <div class="col s12">
+
+                    <blockquote class="right-align margin_20">
+                        Acuerdese de chequear su correo.<br>
+                        Si no activa su cuenta, no podra ingresar la proxima vez.
+                    </blockquote>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+        <main class="row" id="content"> {% block content %}{% endblock %}
+            </main>
+
+            {% include "footer.twig" %}
+
+            {% block js %}
+
+                {# JavaScript al final del body para obtimizar las cargas #}
+
+                {# JavaScript de Jquery #}<script src="js/jquery-3.3.1.min.js" type="text/javascript"> </script>
+
+                {# JavaScript de Materialize #}
+                <script src="js/materialize.min.js" type="text/javascript"></script>
+
+                {# Activa el SideNav de Materialize #}
+                <script src="js/navegacion.js" type="text/javascript"></script>
+
+                {# Advertencia js desactivado#}
+
+                <noscript>
+
+                    <div class="row">
+
+                        <div class="col s12 center-align">
+                            <div class="card-panel red lighten-2 z-depth-3 white-text">
+                                Javascript está deshabilitado en su navegador web.<br/>
+                                Por favor, para ver correctamente este sitio,<strong>
+                                    <em>habilite javascript</em>
+                                </strong>.<br/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </noscript>
+
+
+            {% endblock %}
+
+        </body>
+
+    </html>

@@ -1,0 +1,305 @@
+<h2>Autoanálisis</h2>
+
+<div id="contenido_etapa" class="texto_page">
+
+    <!-- Introduccion Etapa 1 -->
+
+    <p>
+        ¿Llevás meses buscando empleo ? ¿ Has pasado horas y horas consultando ofertas online? …
+        <br />Pero, ¿por dónde empezar?<br />
+    </p>
+    <p>
+        Lo más importante de la búsqueda de empleo es conocernos realizando un autoanálisis personal y profesional
+    </p>
+    <p>¿Por qué es importante que te conozcas?</p>
+
+    <div class="row">
+        <div class="col l4 m12 s12 center-align">
+            <img src="img/autoanalisis.jpg" alt="autoanálisis" class="responsive-img"/>
+        </div>
+        <div class="col l8 m12 s12">
+                <p>Principalmente para ayudarte a:</br>
+                <br>
+                    - Saber lo que eres capaz de hacer y lo que puedes aportar<br />
+                    - Conocer en todo momento tus limitaciones y cómo superarlas</br>
+                    - Identificar preferencias sobre qué tipo de trabajo estás dispuesto a buscar<br />
+                    - Determinar las prioridades sobre los puestos buscados<br />
+                    - Enumerar los medios necesarios<br />
+                    - Definir las estrategias<br />
+                    - Establecer plazo o fases para la búsqueda de empleo<br />
+                    - Afrontar una entrevista de trabajo con confianza
+                </p>
+        </div>
+    </div>
+
+    <p>¿Tenés dudas de cómo hacer tu autoanálisis ? Aquí va una ayuda</p>
+    <p>→ A través de una serie de actividades que te presentamos a continuación  te guiaremos en cuanto qué debes tener
+        en cuenta a la hora de postularte.</p>
+    <p>En la primer actividad, tienes que decidir cómo organizarías la información sobre tu formación en el CV u hoja de
+        vida que enviarás. Lee con atención los tres ítems y luego haz clic con el botón izquierdo del mouse sobre uno y
+        sin soltar el botón arrástralo hasta la posición que consideres adecuada.</p>
+    <p>Finalmente haz click en le botón "comprobar" para obtener el resultado.</p>
+
+    <!-- Actividad 1 : Conocimientos -->
+
+    <div class="card-panel blue lighten-4">
+
+        <h3>Conocimientos: Toda tu formación.</h3>
+
+        <p>¿Cuál te parece el orden más adecuado para esta información?</p>
+
+        <ul class="collection" id="sortable">
+            <a id="orden_1" data-hidden="147" class="collection-item">Titulación reglada. Descripción, nivel, año
+                finalizado,
+                centro.</a>
+            <a id="orden_2" data-hidden="258" class="collection-item">Formación complementaria. Descripción, año, horas,
+                centro, área.</a>
+            <a id="orden_3" data-hidden="369" class="collection-item">Formación informal. Formación (conocimientos)
+                adquiridos en el desempeño de un
+                trabajo, voluntariado, prácticas, colaboración, aficiones, etc.</a>
+        </ul>
+
+        <div id="ordenar_button" class="right-align">
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta_ordenar(3,'respuesta_conocimientos');">Comprobar</a>
+            <a class="waves-effect waves-light btn" onclick="arriba();"><i
+                    class="material-icons">keyboard_arrow_up</i></a>
+            <a class="waves-effect waves-light btn" onclick="abajo();"><i
+                    class="material-icons">keyboard_arrow_down</i></a>
+        </div>
+
+        <div hidden id="ordenar_respuesta" class="card-panel">
+        </div>
+
+    </div>
+
+    <!-- Actividad 2: Destrezas -->
+
+    <div class="card-panel red lighten-3">
+
+        <h3>Destrezas</h3>
+
+        <p>Leé con atención y decidí si estas afirmaciones son verdaderas o falsas</p>
+
+        <form id="formulario_vof">
+
+            <!-- Pregunta 1 -->
+
+            <h5>Pregunta 1</h5>
+            <div>
+                <p>
+                    Las destrezas son las habilidades con las las cuales se realiza una determinada cosa, trabajo o
+                    actividad de manera correcta.
+                </p>
+            </div>
+            <p>
+                <label>
+                    <input name="pregunta1" id="true_1" type="radio" value="1" checked />
+                    <span>VERDADERO</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="pregunta1" id="false_1" type="radio" value="0" />
+                    <span>FALSO</span>
+                </label>
+            </p>
+
+            <!-- Pregunta 2 -->
+
+            <h5>Pregunta 2</h5>
+            <div>
+                <p>
+                    Al entrevistador le interesarán solo las destrezas adquiridas en el periodo formativo
+                </p>
+            </div>
+            <p>
+                <label>
+                    <input name="pregunta2" id="true_2" type="radio" value="1" checked>
+                    <span>VERDADERO</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="pregunta2" id="false_2" type="radio" value="0" />
+                    <span>FALSO</span>
+                </label>
+            </p>
+
+            <!-- Pregunta 3 -->
+
+            <h5>Pregunta 3</h5>
+            <div>
+                <p>
+                    Las destrezas adquiridas en los puestos de trabajo desempeñados, incluido las prácticas no
+                    remunerados, el voluntariado, ocio, aficiones, etc no son relevantes a la hora de la entrevista
+                </p>
+            </div>
+            <p>
+                <label>
+                    <input name="pregunta3" id="true_3" type="radio" value="1" checked>
+                    <span>VERDADERO</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input name="pregunta3" id="false_3" type="radio" value="0" />
+                    <span>FALSO</span>
+                </label>
+            </p>
+
+        </form>
+
+        <div id="vof_button" class="right-align">
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('#vof','vof','respuesta_destrezas');">Comprobar</a>
+        </div>
+
+        <div hidden id="vof_respuesta" class="card-panel">
+        </div>
+
+    </div>
+
+    <!-- Actividad 3 : Actitud -->
+
+    <div class="card-panel blue lighten-4">
+
+        <h3>Actitud</h3>
+
+        <p>Tu actitud y comportamiento en el entorno de trabajo y las habilidades sociolaborales son aspectos muy
+            valorados por los entrevistadores.</p>
+        <p>Lee la lista de ítems que te presentamos, reflexiona y tilda los ítems que te caracterizan. Puedes elegir más
+            de uno.</p>
+
+        <form id="formulario_multiple">
+
+            <p>
+                <label>
+                    <input id="checkbox_1" type="checkbox" name="actitud[]" class="filled-in" value="1" />
+                    <span>Reflexión y eficiencia</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_2" type="checkbox" name="actitud[]" class="filled-in" value="2" />
+                    <span>Iniciativa y decisión</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_3" type="checkbox" name="actitud[]" class="filled-in" value="3" />
+                    <span>Puntualidad, seriedad y lealtad</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_4" type="checkbox" name="actitud[]" class="filled-in" value="4" />
+                    <span>Facilidad para trabajar en equipo</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_5" type="checkbox" name="actitud[]" class="filled-in" value="5" />
+                    <span>Optimismo y resistencia ante las frustraciones</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_6" type="checkbox" name="actitud[]" class="filled-in" value="6" />
+                    <span>Polivalencia laboral o la capacidad de los empleados de una empresa de desempeñar diferentes
+                        roles dentro de la misma</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_7" type="checkbox" name="actitud[]" class="filled-in" value="7" />
+                    <span>Afán de superación</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_8" type="checkbox" name="actitud[]" class="filled-in" value="8" />
+                    <span>Capacidad de aprender</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="checkbox_9" type="checkbox" name="actitud[]" class="filled-in" value="9" />
+                    <span>Adaptación a distintos entornos de trabajo</span>
+                </label>
+            </p>
+
+        </form>
+
+        <div id="multiple_button" class="right-align">
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('#multiple','multiple','respuesta_actitud');">Comprobar</a>
+        </div>
+
+        <div hidden id="multiple_respuesta" class="card-panel">
+        </div>
+
+    </div>
+
+    <!-- Material de etapa -->
+
+    <div class="card-panel">
+
+        <h3>Lectura en línea:</h3>
+
+        <p>
+            Al hacer clic en el siguiente <a href=""
+                onclick="ventana_emergente('https://www.deustoformacion.com/blog/empresa/cuales-son-potenciar-tus-habilidades-para-trabajar-equipo');return false">sitio
+                web</a>
+            se abrirá una ventana emergente que podrás maximizar y luego de leer su contenido podrás cerrar.
+        </p>
+        <p>
+            En este material te presentamos las <strong>habilidades</strong> que se espera que tengamos a la hora de
+            buscar un empleo donde se valore el trabajo en equipo.
+        </p>
+
+        <p>
+            Muy bien, ya  has reflexionado y tomado nota sobre tus fortalezas y debilidades.
+        </p>
+        <p>
+            Ahora debes agrupar todos los conocimientos, las destrezas, las actitudes y las cualidades que son
+            requeridas para el puesto de trabajo que aspiras y la empresa en la que quieres trabajar.
+        </p>
+
+        <div class="card horizontal">
+            <div class="card-image">
+                <img alt="" {#height="140"#} src="img/match.png" {# width="258" #} />
+            </div>
+            <div class="card-stacked">
+                <div class="card-content valign-wrapper">
+                    <p>
+                        Lo que pretendemos es que tu perfil profesional se <strong>ajuste</strong>
+                        lo más posible al puesto solicitado, así tu  currículum será leído, y te llamarán para la
+                        entrevista.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-panel">
+
+        <h3>Presentación en video:</h3>
+
+        <p>
+            En esta presentación aparece una serie consejos para que armar tu C.V.
+        </p>
+        <p>
+            El video tiene música que si te incomoda, puedes apagarla. Puedes pausar el video o verlo todas las veces
+            que te sea
+            necesario.
+        </p>
+
+        <div class="video-container">
+            <iframe width="853" height="480" src="https://www.powtoon.com/embed/dZ6r7OZVLlT/" frameborder="0"
+                allowfullscreen></iframe>
+        </div>
+
+
+    </div>
+
+
+</div>

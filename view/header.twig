@@ -1,0 +1,196 @@
+{% block header %}
+
+    <div class="col m6 ocultar" id="page_title">
+        <h2 class="flow-text h-margin">Simulador de entrevista de trabajo para hipoacúsicos</h2>
+    </div>
+
+    <header id='encabezado'>
+
+        <div class="row sin_margin valign-wrapper">
+
+            <div class="col m3 title-header accesible" tabindex="1">
+                <h3 class="flow-text h-margin">Simulador de entrevista de trabajo para hipoacúsicos</h3>
+            </div>
+
+            <div class="col s12 m9 right-align icon-header" >
+                <a href="index.php" class="accesible" tabindex="2"><img src="img/logo_completo.png" alt="logo del sitio"></a>
+            </div>
+
+
+        </div>
+
+        {# Navbar del Login y Registro #}
+
+        {% if mode == 0 %}
+
+            <nav id="nav_header">
+                <div class="nav-wrapper margin_nav">
+                    <a id="menu_sitio" class="sidenav-trigger accesible" data-target="menu-login" href="#" tabindex="3" aria-label="Menu">
+                        <i class="material-icons" aria-hidden="true" focusable="false">menu</i>
+                    </a>
+                    <ul class="left hide-on-med-and-down">
+
+                        <li id="login">
+                            <a href="index.php" class="accesible" tabindex="3">Iniciar Sesión</a>
+                        </li>
+
+                        <li id="registro">
+                            <a href="registro.php" class="accesible" tabindex="4">Registrarse</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+
+            {# Sidenav del Login y Registro #}
+
+            <ul class="sidenav" id="menu-login" hidden>
+
+                {# En el Sidenav, la clase primero sirve para marcar el primer elemento al cual va a hacer focus #}
+
+                <li id="login_side">
+                    <a href="index.php" class="primero">Iniciar Sesión</a>
+                </li>
+
+                <li id="registro_side">
+                    <a href="registro.php">Registrarse</a>
+                </li>
+
+                <li>
+                    <a class="waves-effect" href="#!" onclick="cerrar();" aria-label="Atras">
+                        <i class="material-icons" aria-hidden="true" focusable="false">arrow_back</i>Atras</a>
+                </li>
+
+            </ul>
+
+        {% else %}
+
+            {# Navbar Principal #}
+
+            <nav id="nav_header">
+                <div class="nav-wrapper margin_nav">
+                    <a id="menu_sitio" class="sidenav-trigger accesible" data-target="menu-principal" href="#" tabindex="3" aria-label="Menu">
+                        <i class="material-icons" aria-hidden="true" focusable="false">menu</i>
+                    </a>
+                    <ul class="left hide-on-med-and-down">
+
+                        <li id="inicio">
+                            <a href="index.php" class="accesible" tabindex="3">Inicio</a>
+                        </li>
+
+                        <li id="modTrabajo">
+                            <a href="index.php?page=modalidad" class="accesible" tabindex="4">Modalidad de trabajo</a>
+                        </li>
+
+                        <li id="comenzar">
+                            <a href="index.php?page=autoevaluacion" class="accesible" tabindex="5">Autoevaluación</a>
+                        </li>
+
+                        <li id="entrevista">
+                            <a href="#" class="accesible" tabindex="6">Entrevista</a>
+                        </li>
+
+                        <li id="opciones">
+                            <a href="#" id="nav" class="accesible" tabindex="6">Opciones</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+
+            {# Sidenav Principal #}
+
+            <ul
+                class="sidenav" id="menu-principal" hidden>
+
+                {# Banner Usuario #}
+
+                <li>
+                    <div class="user-view oscurecer">
+                        
+                        <div class="background">
+                            <img class="tamaño_img_opciones" src="img/banner5.jpg" alt="imagen del panel de opciones">
+                        </div>
+
+                        {# En el Sidenav, la clase primero sirve para marcar el primer elemento al cual va a hacer focus #}
+
+                        <span class="white-text flow-text primero" tabindex="1">
+                            <span class="sr-only">Nombre de usuario</span>
+                            <strong>{{usuario}}</strong>
+                        </span>                        
+
+                        <span class="white-text name" tabindex="2">
+                            <span class="sr-only">Nombre y apellido</span>
+                            {{nombre}}
+                            {{apellido}}
+                        </span>
+
+                        <span class="white-text email" tabindex="3">
+                            <span class="sr-only">Correo electronico</span>
+                            {{correo}}
+                        </span>
+
+                        <a class="waves-effect waves-light btn btn-floating halfway-fab red btn_settings" href="index.php?page=configuraciones" aria-label="Configuraciones del Perfil">
+                            <i class="material-icons" aria-hidden="true" focusable="false">settings</i>
+                        </a>
+
+                    </div>
+
+                </li>
+
+                {# Opciones de pagina #}
+
+                <li>
+                    <a class="subheader">OPCIONES</a>
+                </li>
+                <li>
+                    <a href="" id="imprimir" onclick="imprimir();return false;">
+                        <i class="material-icons" aria-hidden="true" focusable="false">local_printshop</i>Imprimir Pagina</a>
+                </li>
+                <li>
+                    <a href="controller/cerrar_sesion.php">
+                        <i class="material-icons" aria-hidden="true" focusable="false">exit_to_app</i>Cerrar Sesion</a>
+                </li>
+                <li>
+                    <a class="waves-effect" href="#!" onclick="cerrar();">
+                        <i class="material-icons" aria-hidden="true" focusable="false">arrow_back</i>Atras</a>
+                </li>
+
+                {# Ir a #}
+
+                <li>
+                    <a class="subheader">IR A</a>
+                </li>
+                <li>
+                    <a href="index.php">
+                        <i class="material-icons left" aria-hidden="true" focusable="false">
+                            home
+                        </i>Inicio</a>
+                </li>
+                <li>
+                    <a href="index.php?page=modalidad">
+                        <i class="material-icons left" aria-hidden="true" focusable="false">
+                            description
+                        </i>Modalidad de trabajo</a>
+                </li>
+                <li>
+                    <a href="index.php?page=autoevaluacion">
+                        <i class="material-icons left" aria-hidden="true" focusable="false">
+                            widgets
+                        </i>Autoevaluación</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="material-icons left" aria-hidden="true" focusable="false">
+                            ondemand_video
+                        </i>Entrevista</a>
+                </li>
+
+            </ul>
+
+        {% endif %}
+
+    </header>
+
+{% endblock %}

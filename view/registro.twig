@@ -1,0 +1,310 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    {# Encabezado Formulario de Registro #}
+
+    <h3 class="center-align accesible" tabindex="5">Registrese ahora</h3>
+
+    {# Formulario #}
+
+    <div class="row">
+
+        <div class="col s10 m10 l6 offset-s1 offset-m1 offset-l3">
+
+            <div class="row">
+                <div class="col s12">
+                    <h5 class="left-align light-blue-text text-darken-4 bold accesible" tabindex="6">Ingrese los siguientes datos</h5>
+                </div>
+            </div>
+
+            <div class="card-panel blue lighten-4 z-depth-3">
+
+                <form autocomplete="off" id="formulario_registro" onsubmit="return validar_registro();">
+
+                    <div class="row">
+
+                        <div class="col s12">
+
+                            <fieldset>
+
+                                <legend class="sr-only">Panel de Registro</legend>
+
+                                {# Mensaje de Error #}
+
+                                <div class="input-field col s12 ocultar" id="error" tabindex="6"></div>
+
+                                {# Nombre y Apellido #}
+
+                                <div class="input-field col s6">
+                                    <input aria-required="true" class="validate accesible" data-hidden="nombre" id="nombre" maxlength="30" name="nombre" tabindex="7" type="text">
+                                    <label for="nombre">Ingrese su nombre</label>
+                                    <span class="helper-text red-text text-lighten-2 error" id="nombre_error" role="alert"></span>
+                                </div>
+
+                                <div class="input-field col s6">
+                                    <input aria-required="true" class="validate accesible" data-hidden="apellido" id="apellido" maxlength="30" name="apellido" tabindex="8" type="text">
+                                    <label for="apellido">Ingrese su apellido</label>
+                                    <span class="helper-text red-text text-lighten-2 error" id="apellido_error" role="alert"></span>
+                                </div>
+
+                                {# Correo #}
+
+                                <div class="input-field col s12">
+                                    <i aria-hidden="true" class="material-icons prefix" focusable="false">email</i>
+                                    <input aria-describedby="ayuda_correo" aria-required="true" class="validate accesible" data-hidden="correo" id="correo" maxlength="40" name="correo" tabindex="9" type="text">
+                                    <label for="correo">Ingrese su correo electronico</label>
+                                    <span class="helper-text" id="ayuda_correo">El correo debe respetar el siguiente formato: "texto@dominio"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            donde dominio puede ser, por ejemplo, gmail.com</span>
+                                    <span class="helper-text red-text text-lighten-2 error" id="correo_error" role="alert"></span>
+                                </div>
+
+                                {# Usuario #}
+
+                                <div class="input-field col s12">
+                                    <i aria-hidden="true" class="material-icons prefix" focusable="false">account_box</i>
+                                    <input aria-required="true" class="validate accesible" data-hidden="usuario" id="usuario" maxlength="30" name="usuario" tabindex="10" type="text">
+                                    <label for="usuario">Ingrese un nombre de usuario</label>
+                                    <span class="helper-text red-text text-lighten-2 error" id="usuario_error" role="alert"></span>
+                                </div>
+
+
+                                {# Contraseña #}
+
+                                <div class="input-field col s10">
+                                    <i aria-hidden="true" class="material-icons prefix" focusable="false">vpn_key</i>
+                                    <input aria-describedby="ayuda_contraseña" aria-required="true" class="validate accesible" data-hidden="contraseña" id="contraseña" maxlength="30" name="contraseña" tabindex="11" type="password">
+                                    <label for="contraseña">Ingrese una contraseña</label>
+                                    <span class="helper-text" id="ayuda_contraseña">La contraseña debe ser mayor de 8 caracteres e incluir al
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            menos
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            una letra mayúscula,una letra minúscula y un número</span>
+                                    <span class="helper-text red-text text-lighten-2 error" id="contraseña_error" role="alert"></span>
+                                </div>
+
+                                <div class="input-field col s2 left-align boton_input">
+                                    <a aria-label="Mostrar/ocultar contraseña" class="btn-floating accesible" onclick="mostrar_ocultar_contraseña();" tabindex="12">
+                                        <i aria-hidden="true" class="large material-icons" focusable="false">remove_red_eye</i>
+                                    </a>
+                                </div>
+
+                                <div class="input-field col s12">
+                                    <i aria-hidden="true" class="material-icons prefix" focusable="false">lock_open</i>
+                                    <input aria-required="true" class="validate accesible" data-hidden="comparacion" id="comparacion" name="comparacion" tabindex="13" type="password">
+                                    <label for="comparacion">Repita su contraseña</label>
+                                    <span class="helper-text red-text text-lighten-2 error" id="comparacion_error" role="alert"></span>
+                                </div>
+
+                                {# Pregunta #}
+
+                                <div class="input-field col s12">
+                                    <div class="flow-text">¿Es hipoacúsico de nacimiento o postlocutivo?</div>
+                                </div>
+
+                                <fieldset>
+
+                                    <legend class="sr-only">¿Es hipoacúsico de nacimiento o postlocutivo?</legend>
+
+                                    <div class="container">
+
+                                        <div class="col s6">
+                                            <p>
+                                                <label>
+                                                    <input checked class="accesible" name="pregunta" tabindex="15" type="radio" value="1"/>
+                                                    <span>Soy hipoacúsico de nacimiento</span>
+                                                </label>
+                                            </p>
+                                        </div>
+
+                                        <div class="col s6">
+                                            <p>
+                                                <label>
+                                                    <input class="accesible" name="pregunta" tabindex="15" type="radio" value="0"/>
+                                                    <span>Soy postlocutivo</span>
+                                                </label>
+                                            </p>
+                                        </div>
+
+                                        <div class="col s12">
+                                            <span class="helper-text red-text text-lighten-2 error" id="pregunta_error" role="alert"></span>
+                                        </div>
+
+                                    </div>
+
+                                </fieldset>
+
+                                {# Nivel educativo #}
+
+                                <div class="input-field col s12">
+                                    <div class="flow-text">
+                                        <i class="material-icons">school</i>
+                                        Nivel educativo alcanzado:
+                                    </div>
+                                </div>
+
+                                <fieldset>
+
+                                    <legend class="sr-only">Nivel educativo alcanzado</legend>
+
+                                    <div class="col s12">
+                                        <p>
+                                            <label>
+                                                <input checked class="accesible" name="nivel" tabindex="17" type="radio" value="1"/>
+                                                <span>Secundario</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input name="nivel" type="radio" value="2" class="accesible" tabindex="17"/>
+                                                <span>Terciario</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input name="nivel" type="radio" value="3" class="accesible" tabindex="17"/>
+                                                <span>Universitario</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input name="nivel" type="radio" value="4" class="accesible" tabindex="17"/>
+                                                <span>Postgrado</span>
+                                            </label>
+                                        </p>
+
+                                        <span class="helper-text red-text text-lighten-2 error" id="nivel_error" role="alert"></span>
+
+                                    </div>
+
+                                </fieldset>
+
+                                {# Lugar de residencia #}
+
+                                <div class="input-field col s12">
+                                    <div class="flow-text">
+                                        <i class="material-icons">location_on</i>
+                                        Lugar de residencia
+                                    </div>
+                                </div>
+
+                                <fieldset>
+
+                                    <legend class="sr-only">Lugar de residencia</legend>
+
+                                    {# Pais #}
+
+                                    <div class="input-field col s12">
+                                        <select aria-required="true" class="browser-default accesible" data-hidden="pais" id="pais" name="pais" tabindex="19">
+                                            <option disabled selected>Seleccione su país</option>
+                                            {% for country in countries %}
+                                                <option value={{country.id_pais}}>{{country.nombre_pais}}</option>";
+                                            {% endfor %}
+
+                                        </select>
+                                        <span class="helper-text red-text text-lighten-2 error" id="pais_error" role="alert"></span>
+                                    </div>
+
+                                    {# Ciudad #}
+
+                                    <div class="input-field col s12">
+                                        <input aria-required="true" class="validate accesible" data-hidden="ciudad" id="ciudad" maxlength="40" name="ciudad" tabindex="20" type="text">
+                                        <label for="ciudad">Ingrese su ciudad</label>
+                                        <span class="helper-text red-text text-lighten-2 error" id="ciudad_error" role="alert"></span>
+                                    </div>
+
+                                </fieldset>
+
+                                {# Selector de grado #}
+
+                                <div class="input-field col s12">
+                                    <div class="flow-text">Grado de hipoacusia:</div>
+                                </div>
+
+                                <fieldset>
+
+                                    <legend class="sr-only">Grado de hipoacusia</legend>
+
+                                    <div class="input-field col s12">
+                                        <select aria-required="true" class="browser-default accesible" data-hidden="grado" id="grado" name="grado" tabindex="22">
+                                            <option disabled selected value="">Elija una opcion</option>
+                                            <option value="1">Leve</option>
+                                            <option value="2">Moderada</option>
+                                            <option value="3">Severa</option>
+                                        </select>
+                                        <span class="helper-text red-text text-lighten-2 error" id="grado_error" role="alert"></span>
+                                    </div>
+
+                                </fieldset>
+
+                                {# Tipo de protesis #}
+
+                                <div class="input-field col s12">
+                                    <div class="flow-text">Tipo de prótesis auditiva:</div>
+                                </div>
+
+                                <fieldset>
+
+                                    <legend class="sr-only">Tipo de prótesis auditiva</legend>
+
+                                    <div class="col s12">
+                                        <p>
+                                            <label>
+                                                <input checked class="accesible" name="tipo" tabindex="24" type="radio" value="1"/>
+                                                <span>Audífono</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input name="tipo" type="radio" value="2" class="accesible" tabindex="24"/>
+                                                <span>Audífono de alta gama</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input name="tipo" type="radio" value="3" class="accesible" tabindex="24"/>
+                                                <span>Implante coclear de conducción ósea</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input name="tipo" type="radio" value="4" class="accesible" tabindex="24"/>
+                                                <span>Implante coclear de estimulación electroacústica</span>
+                                            </label>
+                                        </p>
+
+                                        <span class="helper-text red-text text-lighten-2 error" id="tipo_error" role="alert"></span>
+
+                                    </div>
+
+                                </fieldset>
+
+                                {# Boton de Registro #}
+
+                                <div class="input-field col s12">
+                                    <div class="right-align">
+                                        <button class="btn waves-effect waves-green accesible" id="registro_button" name="action" type="submit">Registrarse
+                                            <i aria-hidden="true" class="material-icons right" focusable="false">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+{% block js %}
+
+    {{ parent() }}
+
+    {# Validaciones #}
+    <script src="js/registro.js" type="text/javascript"></script>
+{% endblock %}

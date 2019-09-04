@@ -1,0 +1,78 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <section class="col s10 offset-s1">
+
+        <h4 class="title_margin">Simulador de entrevista de trabajo para hipoacúsicos</h4>
+
+        <article class="article_margin texto_page">
+
+            <ul class="collapsible">
+                <li class="active">
+                    <div class="collapsible-header">
+                        <div class="valign-wrapper">
+                            <i class="material-icons">people</i>
+                            <b>Destinatarios</b>
+                        </div>
+                    </div>
+                    <div class="collapsible-body">
+                        <span>
+                            Adultos activos entre 20 y 45 años con distintos grados de hipoacusia (pérdida auditiva) que utilizan dispositivos auditivos
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    (audífonos e implantes cocleares) con formación profesional o técnica que se postulen a una selección laboral y 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    necesiten mejorar sus habilidades comunicativas en una situación de entrevista laboral.
+                        </span>
+                    </div>
+                </li>
+            </ul>
+
+        </article>
+
+        <article class="article_margin texto_page">
+
+            <ul class="collapsible">
+                <li class="active">
+                    <div class="collapsible-header">
+                        <div class="valign-wrapper">
+                            <i class="material-icons">sentiment_satisfied_alt</i>
+                            <b>Requisitos</b>
+                        </div>
+                    </div>
+                    <div class="collapsible-body">
+                        <span>Tener conocimientos básicos de navegación por Internet y buena predisposición para modificar conductas comunicacionales</span>
+                    </div>
+                </li>
+            </ul>
+
+        </article>
+
+        <article class="article_margin texto_page">
+            <ul class="collapsible">
+                <li class="active">
+                    <div class="collapsible-header">
+                        <div class="valign-wrapper">
+                            <i class=" large material-icons">info</i>
+                            <b>Objetivos</b>
+                        </div>
+                    </div>
+                    <div class="collapsible-body">
+                        <p>Objetivo general:</p>
+                        <p>
+                            - Desarrollar estrategias comunicacionales efectivas en la situación de entrevista laboral.
+                        </p>
+                        <p>Objetivos específicos:</p>
+                        <p>
+                            - Favorecer la acumulación de en la toma de decisiones de respuestas acertadas en una entrevista laboral.<br>
+                            - Practicar la aplicación de técnicas comunicacionales eficaces en una entrevista laboral.<br>
+                            - Adquirir destrezas tecnológicas, como ser, el manejo de recursos educativos abiertos incorporados en la experiencia educativa de todo en la vida (
+                            <i>long life learning</i>)
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </section>
+{% endblock %}
+{% block js %}
+    {{ parent() }}{# Aca vamos agregando los scrits que se necesitan #}{# Opcion imprimir #}<script src="js/imprimir.js" type="text/javascript"> </script>{# Modal #}<script src="js/modal.js" type="text/javascript"></script>{# Collapssible #}<script src="js/collapsible.js" type="text/javascript"></script>
+{% endblock %}
