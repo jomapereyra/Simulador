@@ -1,12 +1,22 @@
 $(document).ready(function () {
 
     //Ordenar Lista
-    $("#sortable").sortable();
-    $("#sortable").disableSelection();
+    $("#ordenar1").sortable();
+    $("#ordenar1").disableSelection();
 
-    $("#sortable a").click(function () {
-        $("#sortable a").removeClass("active");
-        if(!$(this).hasClass('block')){
+    $("#ordenar1 a").click(function () {
+        $("#ordenar1 a").removeClass("active");
+        if (!$(this).hasClass('block')) {
+            $(this).addClass("active");
+        }
+    });
+
+    $("#ordenar2").sortable();
+    $("#ordenar2").disableSelection();
+
+    $("#ordenar2 a").click(function () {
+        $("#ordenar2 a").removeClass("active");
+        if (!$(this).hasClass('block')) {
             $(this).addClass("active");
         }
     });
@@ -14,12 +24,9 @@ $(document).ready(function () {
     //Indico mi etapa inicial
     var indice = 1;
 
-    cargar_etapa(indice);
-
-    cargar_breadcrumb();
+    carga_inicial();
 
     calcular_progreso();
-
 
     //Funcion del boton "Reanudar"
     $("#last").click(function () {
@@ -29,7 +36,6 @@ $(document).ready(function () {
         ir_a(etapa);
 
     });
-
 
     /* El evento al presionar el boton siguiente (chequea que haya una etapa siguiente o que se pueda avanzar. En caso de haberla carga sus respuestas) */
 
@@ -152,13 +158,6 @@ $(document).ready(function () {
 
 });
 
-
-/*
-function ventana_emergente(pagina) {
-    window.open(pagina, 'TituloParaLaNuevaVentana', 'toolbar=yes');
-}
-*/
-
 /* Muestra un mensaje de respuesta correcta */
 
 function mostrar_correcto(id) {
@@ -225,42 +224,42 @@ function mostrar_advertencia(id) {
 
 // El envio de respuesta de una actividad tipo ordenar. 
 
-function enviar_respuesta_ordenar(tamaño, calcular_respuesta) {
+function enviar_respuesta_ordenar(tamaño, id, etapa, actividad) {
 
     var orden = new Array(tamaño);
     var i = 0;
 
-    $("#sortable a").each(function () {
+    $("#" + id + " a").each(function () {
         orden[i] = $(this).data("hidden");
         i++;
     });
 
     $.ajax({
-        url: "controller/autoevaluacion/" + calcular_respuesta + ".php",
+        url: "controller/autoevaluacion/respuesta_actividad.php",
         method: "POST",
-        data: { 'orden': JSON.stringify(orden) },
+        data: { 'orden': JSON.stringify(orden), 'etapa': etapa, 'actividad': actividad },
         cache: "false",
         success: function (resultado) {
 
             var registro = JSON.parse(resultado);
 
             if (registro.error) {
-                mostrar_advertencia("#ordenar");
+                mostrar_advertencia("#" + id);
             }
             else {
 
                 if (registro.correcto) {
 
-                    mostrar_correcto("#ordenar");
+                    mostrar_correcto("#" + id);
 
                 }
                 else {
 
-                    mostrar_incorrecto("#ordenar", registro.solucion);
+                    mostrar_incorrecto("#" + id, registro.solucion);
 
                 }
 
-                desactivar_recurso("ordenar");
+                desactivar_recurso("ordenar", id);
 
                 calcular_progreso();
 
@@ -272,14 +271,13 @@ function enviar_respuesta_ordenar(tamaño, calcular_respuesta) {
 }
 
 // Envia la respuesta de un recurso tipo vof,multiple o rellenar
-// Deberia cargar solo un archivo php y este quee se encarge de hacer el procesamiento correspondiente
 
-function enviar_respuesta(id, recurso, calcular_respuesta) {
+function enviar_respuesta(id, recurso) {
 
     $.ajax({
-        url: "controller/autoevaluacion/" + calcular_respuesta + ".php",
+        url: "controller/autoevaluacion/respuesta_actividad.php",
         method: "POST",
-        data: $('#formulario_' + recurso).serialize(),
+        data: $('#formulario_' + id).serialize(),
         cache: "false",
         success: function (resultado) {
 
@@ -288,18 +286,18 @@ function enviar_respuesta(id, recurso, calcular_respuesta) {
             var registro = JSON.parse(resultado);
 
             if (registro.error) {
-                mostrar_advertencia(id);
+                mostrar_advertencia("#" + id);
             }
             else {
 
                 if (registro.correcto) {
 
-                    mostrar_correcto(id);
+                    mostrar_correcto("#" + id);
 
                 }
                 else {
 
-                    mostrar_incorrecto(id, registro.solucion);
+                    mostrar_incorrecto("#" + id, registro.solucion);
 
                 }
 
@@ -307,7 +305,7 @@ function enviar_respuesta(id, recurso, calcular_respuesta) {
                     rellenar_respuesta(registro.rellenar, registro.seteo);
                 }
 
-                desactivar_recurso(recurso);
+                desactivar_recurso(recurso, id);
 
                 calcular_progreso();
 
@@ -338,33 +336,33 @@ function rellenar_respuesta(respuestas, seteo) {
 
 // Deshabilita un determinado recurso
 
-function desactivar_recurso(recurso) {
+function desactivar_recurso(recurso, id) {
     switch (recurso) {
 
         case "vof":
 
-            $("#formulario_vof input").attr("disabled", true);
+            $("#formulario_" + id + " input").attr("disabled", true);
 
             break;
 
         case "multiple":
 
-            $("#formulario_multiple input").attr("disabled", true);
+            $("#formulario_" + id + " input").attr("disabled", true);
 
             break;
 
         case "ordenar":
 
-            $("#sortable").sortable();
-            $("#sortable").sortable("disable");
-            $("#sortable a").removeClass("active");
-            $("#sortable a").addClass("block");
+            $("#" + id).sortable();
+            $("#" + id).sortable("disable");
+            $("#" + id + " a").removeClass("active");
+            $("#" + id + " a").addClass("block");
 
             break;
 
         case "rellenar":
 
-            $("#formulario_rellenar input").attr("disabled", true);
+            $("#formulario_" + id + " input").attr("disabled", true);
 
             break;
 
@@ -373,14 +371,12 @@ function desactivar_recurso(recurso) {
 
 //Evento que capta el click de la lista a ordenar
 
-function seleccionar_ordenar(num) {
+function seleccionar_ordenar(id, idFather) {
 
-    var id = "#orden_" + num;
+    if (!$("#" + id).hasClass('block')) {
 
-    if (!$(id).hasClass('block')) {
-
-        $("#sortable a").removeClass("active");
-        $(id).addClass("active");
+        $("#" + idFather + " a").removeClass("active");
+        $("#" + id).addClass("active");
 
     }
 
@@ -390,37 +386,42 @@ function seleccionar_ordenar(num) {
 
 /* Carga las respuestas de una etapa especifica */
 
-function cargar_etapa(numero) {
+function cargar_etapa(num) {
 
-    var cant=[0,3,1,1,1,1];
+    if (num < 5) {
 
-    $.ajax({
-        url: "controller/autoevaluacion/traer_etapa.php",
-        method: "POST",
-        cache: "false",
-        data: { etapa: numero, cant_actividades: cant[numero] },
-        success: function (resultado) {
+        var cant = [0, 3, 1, 1, 1, 1];
+        var numero = num + 1;
 
-            console.log(resultado);
+        $.ajax({
+            url: "controller/autoevaluacion/traer_etapa.php",
+            method: "POST",
+            cache: "false",
+            data: { 'etapa': numero, 'cant_actividades': cant[numero] },
+            success: function (resultado) {
 
-            var registro = JSON.parse(resultado);
+                console.log(resultado);
 
-            for (index = 0; index < cant[numero]; index++) {
+                var registro = JSON.parse(resultado);
 
-                num_actividad = index + 1;
+                for (index = 0; index < cant[numero]; index++) {
 
-                if (registro.completada[index]) {
+                    num_actividad = index + 1;
 
-                    mostrar_respuestas(registro.recurso[index], registro.respuestas["actividad_" + num_actividad]);
+                    if (registro.completada[index]) {
 
-                    if (registro.correcto[index]) {
+                        mostrar_respuestas(registro.recurso[index], registro.respuestas["actividad_" + num_actividad]);
 
-                        mostrar_correcto(registro.id[index]);
+                        if (registro.correcto[index]) {
 
-                    }
-                    else {
+                            mostrar_correcto(registro.id[index]);
 
-                        mostrar_incorrecto(registro.id[index], registro.solucion["actividad_" + num_actividad]);
+                        }
+                        else {
+
+                            mostrar_incorrecto(registro.id[index], registro.solucion["actividad_" + num_actividad]);
+
+                        }
 
                     }
 
@@ -428,50 +429,15 @@ function cargar_etapa(numero) {
 
             }
 
-        }
+        });
 
-    });
+    }
 
-    if(numero == 6){
+    if (num == 6) {
         progreso_finalizado();
     }
 
 }
-
-
-// Carga la respuesta de una actividad especifica
-
-/*function cargar(id, traer_respuestas, recurso) {
-
-    $.ajax({
-        url: "controller/autoevaluacion/" + traer_respuestas + ".php",
-        method: "POST",
-        cache: "false",
-        success: function (resultado) {
-
-            var registro = JSON.parse(resultado);
-
-            if (registro.completada) {
-
-                mostrar_respuestas(recurso, registro.respuestas);
-
-                if (registro.correcto) {
-
-                    mostrar_correcto(id);
-
-                }
-                else {
-
-                    mostrar_incorrecto(id, registro.solucion);
-
-                }
-
-            }
-
-        }
-    });
-
-}*/
 
 // Muestra la respuesta y deshabilita los campos correspondientes
 
@@ -560,11 +526,11 @@ function progreso_finalizado() {
 
 }
 
-function cargar_breadcrumb() {
+function carga_inicial() {
 
 
     $.ajax({
-        url: "controller/autoevaluacion/traer_breadcrumb.php",
+        url: "controller/autoevaluacion/traer_inicial.php",
         method: "POST",
         cache: "false",
         success: function (resultado) {
@@ -573,7 +539,9 @@ function cargar_breadcrumb() {
 
             var clase_breadcrumb = "font_breadcrumb_big";
 
-            var tamaño = registro.contenido.length;
+            var tamaño = registro.nombres.length;
+
+            //Configuro el breadcrumb
 
             if (tamaño > 3) {
 
@@ -582,7 +550,7 @@ function cargar_breadcrumb() {
             }
 
             if (tamaño > 1) {
-                jQuery.each(registro.contenido, function (index, val) {
+                jQuery.each(registro.nombres, function (index, val) {
                     $("#breadcrumb_autoevaluacion").append("<a id='enlace_etapa" + index + "' data-hidden='" + index + "' class='breadcrumb " + clase_breadcrumb + "' onclick='ir_a(" + index + ");' href='#'>" + val + "</a>");
                 });
             }
@@ -592,23 +560,39 @@ function cargar_breadcrumb() {
 
             $("#enlace_etapa0").addClass("etapa_actual");
 
-            return tamaño;
+            /**********************************************************************************/
+
+            //Cargo las paginas que ya recorri junto a sus respuestas
+
+            jQuery.each(registro.paginas, function (index, val) {
+                $("#" + val).load("view/autoevaluacion/" + val + ".html");
+                cargar_etapa(index);
+            });
+
+            /**********************************************************************************/
+
+
 
         }
     });
 }
 
+//Abre alguna etapa ya recorrida a partir de seleccionarla en el bread
+
 function ir_a(etapa) {
 
     var correspondencia_pagina = ['autoanalisis', 'preparate', 'lenguaje_corporal', 'tienes_un_minuto', 'negociar', 'repasemos', 'llego_el_momento'];
 
-    $("#contenido").fadeOut("slow", "swing", function () {
-        $("#contenido").load("view/autoevaluacion/" + correspondencia_pagina[etapa] + ".html", cargar_etapa(etapa));
-        $("#contenido").fadeIn("slow");
-    });
-
+    //Quito la marca actual del bread
     $("#breadcrumb_autoevaluacion a").removeClass("etapa_actual");
+
+    //Agrego la marca al bread
     $("#enlace_etapa" + etapa).addClass("etapa_actual");
+
+    $(".actual").fadeOut("slow", "swing");
+    $(".actual").removeClass("actual");
+    $("#" + correspondencia_pagina[etapa]).addClass("actual");
+    $(".actual").fadeIn("slow");
 
 }
 
@@ -643,23 +627,23 @@ function tamaño_breadcrumb() {
 
 //Funciones de la actividad ordenar
 
-function arriba() {
-    item = $("#sortable .active");
+function arriba(id) {
+    item = $("#" + id + " .active");
     before = item.prev();
     item.insertBefore(before);
 }
 
 function abajo() {
-    item = $("#sortable .active");
+    item = $("#" + id + " .active");
     after = item.next();
     item.insertAfter(after);
 }
 
-function desactivar() {
+/*function desactivar() {
     $("#sortable").sortable("disable");
-}
-
+}*/
+/*
 function ordenar(item1, item2, item3) {
     $(item1).insertBefore($(item2));
     $(item3).insertAfter($(item2));
-}
+}*/

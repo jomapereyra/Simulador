@@ -27,7 +27,7 @@
 
         <p>Leé con atención y decidí si estas afirmaciones son verdaderas o falsas</p>
 
-        <form id="formulario_vof">
+        <form id="formulario_vof2">
 
             <!-- Pregunta 1 -->
 
@@ -39,13 +39,13 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta1" id="true_1" type="radio" value="1" checked />
+                    <input name="pregunta1" id="vof2_true_1" type="radio" value="1" checked />
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta1" id="false_1" type="radio" value="0" />
+                    <input name="pregunta1" id="vof2_false_1" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -60,13 +60,13 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta2" id="true_2" type="radio" value="1" checked>
+                    <input name="pregunta2" id="vof2_true_2" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta2" id="false_2" type="radio" value="0" />
+                    <input name="pregunta2" id="vof2_false_2" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -80,13 +80,13 @@
             </p>
             <p>
                 <label>
-                    <input name="pregunta3" id="true_3" type="radio" value="1" checked>
+                    <input name="pregunta3" id="vof2_true_3" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta3" id="false_3" type="radio" value="0" />
+                    <input name="pregunta3" id="vof2_false_3" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -102,24 +102,28 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta4" id="true_4" type="radio" value="1" checked>
+                    <input name="pregunta4" id="vof2_true_4" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta4" id="false_4" type="radio" value="0" />
+                    <input name="pregunta4" id="vof2_false_4" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
 
+            <input name="etapa" type="hidden" value="3">
+
+            <input name="actividad" type="hidden" value="1">
+
         </form>
 
-        <div id="vof_button" class="right-align">
-            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('#vof','vof','respuesta_vof');">Comprobar</a>
+        <div id="vof2_button" class="right-align">
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('vof2','vof');">Comprobar</a>
         </div>
 
-        <div hidden id="vof_respuesta" class="card-panel">
+        <div hidden id="vof2_respuesta" class="card-panel">
         </div>
 
     </div>

@@ -46,47 +46,37 @@
             video,te pedimos que pongas los pasos para desarrollar tu elevator pitch en
             el orden correcto.</p>
 
-        <ul class="collection" id="sortable">
-            <a id="orden_3" data-hidden="3" class="collection-item" onclick="seleccionar_ordenar(3)">Dí una
+        <ul class="collection" id="ordenar2">
+            <a id="orden2_3" data-hidden="3" class="collection-item" onclick="seleccionar_ordenar('orden2_3','ordenar2')">Dí una
                 afirmación sorprendente o haz una pregunta</a>
-            <a id="orden_5" data-hidden="5" class="collection-item" onclick="seleccionar_ordenar(5)">Cuenta
+            <a id="orden2_5" data-hidden="5" class="collection-item" onclick="seleccionar_ordenar('orden2_5','ordenar2')">Cuenta
                 quién eres y qué haces</a>
-            <a id="orden_1" data-hidden="1" class="collection-item" onclick="seleccionar_ordenar(1)">Enumera
+            <a id="orden2_1" data-hidden="1" class="collection-item" onclick="seleccionar_ordenar('orden2_1','ordenar2')">Enumera
                 qué problemas o necesidades cubres</a>
-            <a id="orden_2" data-hidden="2" class="collection-item"
-                onclick="seleccionar_ordenar(2);">Menciona las soluciones que aportas</a>
-            <a id="orden_4" data-hidden="4" class="collection-item" onclick="seleccionar_ordenar(4)">Revela
+            <a id="orden2_2" data-hidden="2" class="collection-item"
+                onclick="seleccionar_ordenar('orden2_2','ordenar2');">Menciona las soluciones que aportas</a>
+            <a id="orden2_4" data-hidden="4" class="collection-item" onclick="seleccionar_ordenar('orden2_4','ordenar2')">Revela
                 qué beneficio obtiene la gente contigo</a>
-            <a id="orden_7" data-hidden="7" class="collection-item"
-                onclick="seleccionar_ordenar(7);">Sustenta tu afirmación de que eres la persona adecuada</a>
-            <a id="orden_6" data-hidden="6" class="collection-item" onclick="seleccionar_ordenar(6);">Llamas
+            <a id="orden2_7" data-hidden="7" class="collection-item"
+                onclick="seleccionar_ordenar('orden2_7','ordenar2');">Sustenta tu afirmación de que eres la persona adecuada</a>
+            <a id="orden2_6" data-hidden="6" class="collection-item" onclick="seleccionar_ordenar('orden2_6','ordenar2');">Llamas
                 a la acción por parte de quien te escucha</a>
 
         </ul>
 
-        <div id="ordenar_button" class="right-align">
+        <div id="ordenar2_button" class="right-align">
             <a class="waves-effect waves-light btn"
-                onclick="enviar_respuesta_ordenar(7,'respuesta_lista');">Comprobar</a>
-            <a class="waves-effect waves-light btn" onclick="arriba();"><i
+                onclick="enviar_respuesta_ordenar(7,'ordenar2',4 ,1);">Comprobar</a>
+            <a class="waves-effect waves-light btn" onclick="arriba('ordenar2');"><i
                     class="material-icons">keyboard_arrow_up</i></a>
-            <a class="waves-effect waves-light btn" onclick="abajo();"><i
+            <a class="waves-effect waves-light btn" onclick="abajo('ordenar2');"><i
                     class="material-icons">keyboard_arrow_down</i></a>
         </div>
 
-        <div hidden id="ordenar_respuesta" class="card-panel">
+        <div hidden id="ordenar2_respuesta" class="card-panel">
         </div>
 
     </div>
-
-    <!--
-
-        Respuestas:
-
-        ¡Correcto!Has prestado atención al video. 
-
-        No es correcto.Vuelve a ver el video y revisa tu respuesta.
-        
-    -->
 
     <p>
         Ejemplo<br>

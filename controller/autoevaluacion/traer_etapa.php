@@ -1,7 +1,5 @@
 <?php
 
-//No se deben repetir los ids
-
 $resultado = [
     'etapa_1' => [
         'completada' => [false, false, false],
@@ -16,7 +14,7 @@ $resultado = [
             'actividad_2' => [],
             'actividad_3' => [],
         ],
-        'id' => ['#ordenar', '#vof', '#multiple'],
+        'id' => ['#ordenar1', '#vof1', '#multiple'],
         'recurso' => ['ordenar', 'vof', 'multiple'],
     ],
 
@@ -45,7 +43,7 @@ $resultado = [
         'solucion' => [
             'actividad_1' => [],
         ],
-        'id' => ['#vof'],
+        'id' => ['#vof2'],
         'recurso' => ['vof'],
     ],
 
@@ -58,7 +56,7 @@ $resultado = [
         'solucion' => [
             'actividad_1' => [],
         ],
-        'id' => ['#ordenar'],
+        'id' => ['#ordenar2'],
         'recurso' => ['ordenar'],
     ],
 
@@ -71,7 +69,7 @@ $resultado = [
         'solucion' => [
             'actividad_1' => [],
         ],
-        'id' => ['#apropiado'],
+        'id' => ['#vof3'],
         'recurso' => ['vof'],
     ],
 ];

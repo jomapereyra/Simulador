@@ -48,26 +48,26 @@
 
         <p>¿Cuál te parece el orden más adecuado para esta información?</p>
 
-        <ul class="collection" id="sortable">
-            <a id="orden_1" data-hidden="147" class="collection-item">Titulación reglada. Descripción, nivel, año
+        <ul class="collection" id="ordenar1">
+            <a id="orden1_1" data-hidden="147" class="collection-item">Titulación reglada. Descripción, nivel, año
                 finalizado,
                 centro.</a>
-            <a id="orden_2" data-hidden="258" class="collection-item">Formación complementaria. Descripción, año, horas,
+            <a id="orden1_2" data-hidden="258" class="collection-item">Formación complementaria. Descripción, año, horas,
                 centro, área.</a>
-            <a id="orden_3" data-hidden="369" class="collection-item">Formación informal. Formación (conocimientos)
+            <a id="orden1_3" data-hidden="369" class="collection-item">Formación informal. Formación (conocimientos)
                 adquiridos en el desempeño de un
                 trabajo, voluntariado, prácticas, colaboración, aficiones, etc.</a>
         </ul>
 
-        <div id="ordenar_button" class="right-align">
-            <a class="waves-effect waves-light btn" onclick="enviar_respuesta_ordenar(3,'respuesta_conocimientos');">Comprobar</a>
-            <a class="waves-effect waves-light btn" onclick="arriba();"><i
+        <div id="ordenar1_button" class="right-align">
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta_ordenar(3,'ordenar1','1','1');">Comprobar</a>
+            <a class="waves-effect waves-light btn" onclick="arriba('ordenar1');"><i
                     class="material-icons">keyboard_arrow_up</i></a>
-            <a class="waves-effect waves-light btn" onclick="abajo();"><i
+            <a class="waves-effect waves-light btn" onclick="abajo('ordenar1');"><i
                     class="material-icons">keyboard_arrow_down</i></a>
         </div>
 
-        <div hidden id="ordenar_respuesta" class="card-panel">
+        <div hidden id="ordenar1_respuesta" class="card-panel">
         </div>
 
     </div>
@@ -80,7 +80,7 @@
 
         <p>Leé con atención y decidí si estas afirmaciones son verdaderas o falsas</p>
 
-        <form id="formulario_vof">
+        <form id="formulario_vof1">
 
             <!-- Pregunta 1 -->
 
@@ -93,13 +93,13 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta1" id="true_1" type="radio" value="1" checked />
+                    <input name="pregunta1" id="vof1_true_1" type="radio" value="1" checked />
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta1" id="false_1" type="radio" value="0" />
+                    <input name="pregunta1" id="vof1_false_1" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -114,13 +114,13 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta2" id="true_2" type="radio" value="1" checked>
+                    <input name="pregunta2" id="vof1_true_2" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta2" id="false_2" type="radio" value="0" />
+                    <input name="pregunta2" id="vof1_false_2" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -136,24 +136,28 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta3" id="true_3" type="radio" value="1" checked>
+                    <input name="pregunta3" id="vof1_true_3" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta3" id="false_3" type="radio" value="0" />
+                    <input name="pregunta3" id="vof1_false_3" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
 
+            <input name="etapa" type="hidden" value="1">
+
+            <input name="actividad" type="hidden" value="2">
+
         </form>
 
-        <div id="vof_button" class="right-align">
-            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('#vof','vof','respuesta_destrezas');">Comprobar</a>
+        <div id="vof1_button" class="right-align">
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('vof1','vof');">Comprobar</a>
         </div>
 
-        <div hidden id="vof_respuesta" class="card-panel">
+        <div hidden id="vof1_respuesta" class="card-panel">
         </div>
 
     </div>
@@ -227,10 +231,14 @@
                 </label>
             </p>
 
+            <input name="etapa" type="hidden" value="1">
+            
+            <input name="actividad" type="hidden" value="3">
+
         </form>
 
         <div id="multiple_button" class="right-align">
-            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('#multiple','multiple','respuesta_actitud');">Comprobar</a>
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('multiple','multiple');">Comprobar</a>
         </div>
 
         <div hidden id="multiple_respuesta" class="card-panel">
@@ -265,7 +273,7 @@
 
         <div class="card horizontal">
             <div class="card-image">
-                <img alt="" {#height="140"#} src="img/match.png" {# width="258" #} />
+                <img alt="" src="img/match.png"/>
             </div>
             <div class="card-stacked">
                 <div class="card-content valign-wrapper">

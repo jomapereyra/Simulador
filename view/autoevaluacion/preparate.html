@@ -64,11 +64,15 @@
                 <input name="rellenar_5" id="rellenar_5" class="center-align" placeholder="completar" type="text" style="width:8em;font-size:20px" maxlength="20"/>                                     
                 . 
             </p>
+
+            <input name="etapa" type="hidden" value="2">
+            
+            <input name="actividad" type="hidden" value="1">
                                                             
         </form>
 
         <div id="rellenar_button" class="right-align">
-            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('#rellenar','rellenar','respuesta_rellenar');">Comprobar</a>
+            <a class="waves-effect waves-light btn" onclick="enviar_respuesta('rellenar','rellenar');">Comprobar</a>
         </div>
 
         <div hidden id="rellenar_respuesta" class="card-panel">

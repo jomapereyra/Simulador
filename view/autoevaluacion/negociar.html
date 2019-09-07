@@ -32,7 +32,7 @@
 
         <p>Lee con atención las situación y tilda "verdadero" lo que te parece apropiado o tilda "falso" lo que no.</p>
 
-        <form id="formulario_vof">
+        <form id="formulario_vof3">
 
             <!-- Pregunta 1 -->
 
@@ -44,13 +44,13 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta1" id="true_1" type="radio" value="1" checked />
+                    <input name="pregunta1" id="vof3_true_1" type="radio" value="1" checked />
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta1" id="false_1" type="radio" value="0" />
+                    <input name="pregunta1" id="vof3_false_1" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -65,13 +65,13 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta2" id="true_2" type="radio" value="1" checked>
+                    <input name="pregunta2" id="vof3_true_2" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta2" id="false_2" type="radio" value="0" />
+                    <input name="pregunta2" id="vof3_false_2" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -84,13 +84,13 @@
             </p>
             <p>
                 <label>
-                    <input name="pregunta3" id="true_3" type="radio" value="1" checked>
+                    <input name="pregunta3" id="vof3_true_3" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta3" id="false_3" type="radio" value="0" />
+                    <input name="pregunta3" id="vof3_false_3" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
@@ -105,59 +105,31 @@
             </div>
             <p>
                 <label>
-                    <input name="pregunta4" id="true_4" type="radio" value="1" checked>
+                    <input name="pregunta4" id="vof3_true_4" type="radio" value="1" checked>
                     <span>VERDADERO</span>
                 </label>
             </p>
             <p>
                 <label>
-                    <input name="pregunta4" id="false_4" type="radio" value="0" />
+                    <input name="pregunta4" id="vof3_false_4" type="radio" value="0" />
                     <span>FALSO</span>
                 </label>
             </p>
 
+            <input name="etapa" type="hidden" value="5">
+
+            <input name="actividad" type="hidden" value="1">
+
         </form>
 
-        <div id="apropiado_button" class="right-align">
+        <div id="vof3_button" class="right-align">
             <a class="waves-effect waves-light btn"
-                onclick="enviar_respuesta('#apropiado','vof','respuesta_apropiado');">Comprobar</a>
+                onclick="enviar_respuesta('vof3','vof');">Comprobar</a>
         </div>
 
-        <div hidden id="apropiado_respuesta" class="card-panel">
+        <div hidden id="vof3_respuesta" class="card-panel">
         </div>
 
     </div>
 
 </div>
-
-<!--
-
-RESPUESTAS:
-
-PREGUNTA 1: Es FALSO. Evita dar una señal que solo te importa
-                        cuánto puedas obtener. Así que siempre espera que el empleador haga una
-                        oferta, y evita ser el primero en comenzar la discusión sobre el salario
-                        . Cuando comiencen a hablar del tema sé flexible. Si vas con una oferta
-                        y te ofrecen menos no te niegues a negociar, ya que quizás ganes menos
-                        de lo esperado, pero mejoren otras cosas en tu vida.
-PREGUNTA 2: Es VERDADERO. Deja muy en claro tu hora de entrada y
-                        salida, si en alguna ocasión tienes que hacer turnos nocturnos o de
-                        fines de semana  antes de firmar cualquier contrato. Dado que
-                        en algunas ocasiones es posible que el lugar donde se realiza el proceso de selección sea distinto al lugar
-                        donde se va a trabajar es necesario saber dónde es el sitio de trabajo
-                        para  analizar cuánta es la distancia desde tu residencia y si vale la
-                        pena aceptar la oferta.
-PREGUNTA 3:Es Falso. El silencio es incómodo para muchas personas,
-                        especialmente durante las negociaciones. Pero lo que consideras como
-                        pausas incómodas son solo pausas naturales en el proceso de
-                        comunicación. Este es el momento cuando la otra persona está procesando
-                        lo que dijiste, o está en el proceso de formular una respuesta.
-PREGUNTA 4: Es Falso. Los empleadores esperan que contra ofertes, pero nadie quiere un regateador
-                    que negociará todo hasta el último centavo. Esta actitud de regatear podría
-                    disgustar al gerente de Recursos Humanos con el que estás tratando. Si el
-                    presupuesto permite $30,000, ya te lo habrían dado. Lo que puedes hacer
-                    ahora es negociar otras ventajas para hacer la diferencia, tal como más
-                    tiempo de vacaciones . De nuevo, la clave es equilibrar lo que quieres y los
-                    intereses del empleador.
-
--->
