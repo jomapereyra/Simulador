@@ -28,4 +28,24 @@ class Recorrido
             return $datos['id_recorrido'];
         }
     }
+
+    public function finalizar($id_recorrido)
+    {
+        $consulta = $this->db->prepare('UPDATE recorrido SET completado = true WHERE id_recorrido = :id');
+        $consulta->bindParam(':id', $id_recorrido);
+        $consulta->execute();
+    }
+
+    public function existe_completado($id_usuario)
+    {
+        $consulta = $this->db->prepare('SELECT id_recorrido FROM recorrido WHERE id_usuario = :id AND completado = 1');
+        $consulta->bindParam(':id', $id_usuario);
+        $consulta->execute();
+        $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+        if ($datos) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

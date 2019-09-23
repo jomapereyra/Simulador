@@ -2,49 +2,32 @@ $(document).ready(function () {
 
     $('.tabs').tabs();
 
-    var mensajes_error = {
-        "campo": "Este campo no debe estar vacio",
-        "largo": "El campo 0 no debe superar los 1 caracteres",
-        "corto": "Debe ingresar al menos 1 caracteres en el campo 0",
-        "regex": "Este campo no respeta un formato de 0 válido",
-        "contraseña": "Las contraseña nueva no coincide con su repeticion",
-    };
-
-    var error = [false, false];
-
-
     $("#contraseña_nueva").change(function () {
         var valor = $("#contraseña_nueva").val();
         var comparacion = $("#comparacion").val();
         if (valor == "") {
-            mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["campo"], 0);
+            mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["campo"]);
         }
         else {
             if (valor.length > 30) {
-                mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["largo"], 30);
+                mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["largo"], 30);
             }
             else {
                 if (valor.length < 8) {
-                    mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["corto"], 8);
+                    mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["corto"], 8);
                 }
                 else {
                     var regex = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
                     if (!regex.test(valor)) {
-                        mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["regex"], 0);
+                        mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["regex"]);
                     }
                     else {
-                        $("#contraseña_nueva_error").empty();
-                        exitoso("#contraseña_nueva");
-                        error[0] = true;
-                        if (!error.includes(false)) {
-                            limpiar_error_codigo();
-                        }
+                        ocultar_mensaje_campo("#contraseña_nueva");
                         if (valor != comparacion) {
-                            mostrar_advertencia("#comparacion_error", "#comparacion", mensajes_error["contraseña"], 0);
+                            mostrar_mensaje_campo("#comparacion", mensajes_error["contraseña"]);
                         }
                         else {
-                            $("#comparacion_error").empty();
-                            exitoso("#comparacion");
+                            ocultar_mensaje_campo("#comparacion");
                         }
                     }
 
@@ -59,73 +42,40 @@ $(document).ready(function () {
         var valor = $("#comparacion").val();
         var comparacion = $("#contraseña_nueva").val();
         if (valor != comparacion) {
-            mostrar_advertencia("#comparacion_error", "#comparacion", mensajes_error["contraseña"], 0);
+            mostrar_mensaje_campo("#comparacion", mensajes_error["contraseña"]);
         }
         else {
-            $("#comparacion_error").empty();
-            exitoso("#comparacion");
-            error[1] = true;
-            if (!error.includes(false)) {
-                limpiar_error_codigo();
-            }
+            ocultar_mensaje_campo("#comparacion");
         }
     });
 
 });
 
-function limpiar_error_codigo() {
-    $("#error_codigo").empty();
-}
+function mostrar_ocultar_contraseña_actual() {
 
-function limpiar_todo_codigo() {
-    limpiar_error_codigo();
-    $("#contraseña_nueva_error").empty();
-    $("#comparacion_error").empty();
-    $("#codigo_error").empty();
-}
+    mostrar_ocultar_contraseña("#contraseña_actual");
 
-function enviar_error_codigo(mensaje) {
-    $("#error_codigo").empty();
-    var html = "<div class='card-panel red lighten-1'><span class='white-text valign-wrapper'style='font-weight: bold'><div class='col s2 center-align'><i class='small material-icons'>error</i></div><div class='col s10'>" + mensaje + "</div></span></div>";
-    $("#error_codigo").append(html);
-    $("#error_codigo").fadeIn();
-    $(".modal-content").animate({
-        scrollTop: $('#error_codigo').position().top
-    }, 'slow');
-}
-
-function enviar_notificacion_codigo(mensaje) {
-    $("#error_codigo").empty();
-    var html = "<div class='card-panel green lighten-1'><span class='white-text valign-wrapper'style='font-weight: bold'><div class='col s2 center-align'><i class='small material-icons'>check_circle</i></div><div class='col s10'>" + mensaje + "</div></span></div>";
-    $("#error_codigo").append(html);
-    $("#error_codigo").fadeIn();
-    $(".modal-content").animate({
-        scrollTop: $('#error_codigo').position().top
-    }, 'slow');
 }
 
 function mostrar_ocultar_contraseña_nueva() {
-    if ($("#contraseña_nueva").attr('type') == "password") {
-        $("#contraseña_nueva").attr('type', 'text');
-    }
-    else {
-        $("#contraseña_nueva").attr('type', 'password');
-    }
+   
+    mostrar_ocultar_contraseña("#contraseña_nueva");
+
+}
+
+function cancelar_seguridad(){
+    
+    cancelar("#formulario_codigo","#seguridad_tab",["#contraseña_nueva","#comparacion","#codigo"],"#mensaje_codigo");
+    cancelar("#formulario_seguridad","#seguridad_tab",["#contraseña_actual"],"#mensaje_seguridad");
+    $("#formulario_codigo").fadeOut("slow", "swing", function () {
+        $("#formulario_seguridad").fadeIn("slow", "swing");
+    });
 
 }
 
 function validar_codigo() {
 
-    var mensajes_error = {
-        "campo": "Este campo no debe estar vacio",
-        "largo": "El campo 0 no debe superar los 1 caracteres",
-        "corto": "Debe ingresar al menos 1 caracteres en el campo 0",
-        "regex": "Este campo no respeta un formato de 0 válido",
-        "contraseña": "Las contraseña nueva no coincide con su repeticion",
-        "codigo":"El codigo ingresado no corresponde al que le hemos enviado",
-    };
-
-    limpiar_todo_codigo();
+    ocultar_todo(["#contraseña_nueva","#comparacion","#codigo"],"#mensaje_codigo");
 
     $.ajax({
         url: "controller/codigo_pass.php",
@@ -138,96 +88,69 @@ function validar_codigo() {
         },
         success: function (resultado) {
 
-            window.setTimeout(function () {
+            var registro = JSON.parse(resultado);
 
-                var registro = JSON.parse(resultado);
+            // Respuesta de Contraseña Nueva
 
-                // Respuesta de Contraseña Nueva
-
-                if (registro.contraseña_campo) {
-                    mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["campo"], 0);
+            if (registro.contraseña_campo) {
+                mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["campo"]);
+            }
+            else {
+                if (registro.contraseña_max) {
+                    mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["largo"], 30);
                 }
                 else {
-                    if (registro.contraseña_max) {
-                        mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["largo"], 30);
+                    if (registro.contraseña_min) {
+                        mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["corto"], 8);
                     }
                     else {
-                        if (registro.contraseña_min) {
-                            mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["corto"], 8);
+                        if (registro.contraseña_formato) {
+                            mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["regex"]);
                         }
                         else {
-                            if (registro.contraseña_formato) {
-                                mostrar_advertencia("#contraseña_nueva_error", "#contraseña_nueva", mensajes_error["regex"], 0);
+                            if (registro.contraseña_coincide) {
+                                mostrar_mensaje_campo("#comparacion", mensajes_error["contraseña"]);
                             }
                             else {
-                                if (registro.contraseña_coincide) {
-                                    mostrar_advertencia("#comparacion_error", "#comparacion", mensajes_error["contraseña"], 0);
-                                }
-                                else {
-                                    exitoso("#contraseña_nueva");
-                                }
+                                exitoso("#contraseña_nueva");
                             }
                         }
                     }
                 }
+            }
 
-                //Respuesta del codigo
+            //Respuesta del codigo
 
-                if(registro.codigo){
-                    mostrar_advertencia("#codigo_error", "#codigo", mensajes_error["codigo"], 0);
-                }
-                else{
-                    exitoso("#codigo");
-                }
+            if (registro.codigo) {
+                mostrar_mensaje_campo("#codigo", mensajes_error["codigo"]);
+            }
+            else {
+                exitoso("#codigo");
+            }
 
-                // Respuesta Conclusion
+            // Respuesta Conclusion
 
-                if (registro.fail) {
-                    enviar_error_codigo("Existen algunos errores que deben corregirse. Asegurese de ingresar bien los datos");
-                }
-                else {
-                    enviar_notificacion_codigo("Se ha modificado la contraseña exitosamente. Recuerdela para su proximo ingreso.");
-                    $("codigo_button").attr("disabled", true);
-                }
-                $("#codigo_button").empty();
-                $("#codigo_button").append("<i class='material-icons left'>email</i>Aplicar cambio");
-
-
-            }, 1000);
+            if (registro.fail) {
+                mostrar_mensaje_formulario("#mensaje_codigo","error");
+            }
+            else {
+                mostrar_mensaje_formulario("#mensaje_codigo","exito");
+                $("codigo_button").attr("disabled", true);
+            }
+            $("#codigo_button").empty();
+            $("#codigo_button").append("<i class='material-icons left'>email</i>Aplicar cambio");
 
         }
+
     });
 
     return false;
 
 }
 
-function mostrar_ocultar_contraseña_actual() {
-    if ($("#contraseña_actual").attr('type') == "password") {
-        $("#contraseña_actual").attr('type', 'text');
-    }
-    else {
-        $("#contraseña_actual").attr('type', 'password');
-    }
-
-}
-
-function limpiar_todo_seguridad() {
-    $("#contraseña_actual_error").empty();
-}
-
 function validar_seguridad() {
 
-    var mensajes_error = {
-        "campo": "Este campo no debe estar vacio",
-        "largo": "El campo 0 no debe superar los 1 caracteres",
-        "corto": "Debe ingresar al menos 1 caracteres en el campo 0",
-        "regex": "Este campo no respeta un formato de 0 válido",
-        "contraseña": "Las contraseña nueva no coincide con su repeticion",
-        "contraseña_actual": "La contraseña ingresada no coincide con la que tiene registrada el usuario actualmente",
-    };
-
-    limpiar_todo_seguridad();
+    ocultar_todo(["#contraseña_actual"],"#mensaje_seguridad");
 
     $.ajax({
         url: "controller/seguridad_pass.php",
@@ -240,39 +163,32 @@ function validar_seguridad() {
         },
         success: function (resultado) {
 
-            window.setTimeout(function () {
+            var registro = JSON.parse(resultado);
 
-                var registro = JSON.parse(resultado);
+            // Respuesta de Contraseña Actual
 
-                // Respuesta de Contraseña Actual
+            if (registro.contraseña_actual) {
+                mostrar_mensaje_campo("#contraseña_actual", mensajes_error["contraseña_actual"]);
+            }
+            else {
+                exitoso("#contraseña_actual");
+            }
 
-                if (registro.contraseña_actual) {
-                    mostrar_advertencia("#contraseña_actual_error", "#contraseña_actual", mensajes_error["contraseña_actual"], 0);
-                }
-                else {
-                    exitoso("#contraseña_actual");
-                }
+            // Respuesta Conclusion
+            if (!registro.fail) {
+                ocultar_mensaje_formulario("#mensaje_seguridad");
+                $("#formulario_seguridad").fadeOut("slow", "swing", function () {
+                    $("#formulario_codigo").fadeIn("slow", "swing", function () {
+                        $("#contraseña_nueva").focus();
+                    });
+                });
+            }
+            else {
+                mostrar_mensaje_formulario("#mensaje_seguridad","error");
+            }
 
-                // Respuesta Conclusion
-                if (!registro.fail) {
-                    limpiar_todo_seguridad();
-                    $("#contraseña_nueva").val("");
-                    $('#contraseña_nueva').attr('style', "");
-                    $("#comparacion").val("");
-                    $('#comparacion').attr('style', "");
-                    $("label").removeClass("active");
-                    $("codigo_button").attr("disabled", false);
-                    $("#seguridad").fadeOut("fast");
-                    $("#seguridad_footer").fadeOut("fast");
-                    $("#cod_seguridad").fadeIn();
-                    $("#codigo_footer").fadeIn();
-                }
-
-                $("#seguridad_button").empty();
-                $("#seguridad_button").append("<i class='material-icons left'>email</i>Solicitar cambio");
-
-
-            }, 1000);
+            $("#seguridad_button").empty();
+            $("#seguridad_button").append("<i class='material-icons left'>email</i>Solicitar cambio");
 
         }
     });

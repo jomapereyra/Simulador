@@ -1,0 +1,30 @@
+{% extends "base_usuario.twig" %}
+
+{% block content %}
+
+    <section class="col s10 offset-s1">
+
+        <h4 class="title_margin accesible" tabindex="6">Entrevista</h4>
+
+        <article class="article_margin texto_page">
+
+            {% if completado %}
+
+                <p class="accesible" tabindex="7">
+                    Se deberia mostrar la primera parte de la entrevista
+                </p>
+
+                {% else %}
+
+                <p class="accesible" tabindex="7">
+                    No puede acceder a la entrevista sin antes completar la autoevaluación
+                </p>
+
+            {% endif %}
+
+
+        </article>
+
+    </section>
+
+{% endblock %}

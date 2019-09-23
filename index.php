@@ -47,6 +47,12 @@ else {
 
     else {
         $datos = $usuario->get_datos_sidenav($_SESSION['usuario']);
+        if ($page == 'entrevista') {
+            require_once 'model/recorrido.php';
+            $recorrido = new Recorrido();
+            $termine = $recorrido->existe_completado($datos['id_usuario']);
+            $datos += ['completado' => $termine];
+        }
     }
 
     $datos += ['name' => $name, 'mode' => 1];

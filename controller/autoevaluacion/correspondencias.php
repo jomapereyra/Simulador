@@ -162,3 +162,5 @@ $correspondencias = [
 $correspondencias_nombres = ['Autoanálisis', 'Preparate para ser un ganador', 'El lenguaje corporal no miente', '¡Tienes un minuto!', 'Aprendemos a negociar', 'Repasemos', 'Llegó el momento!'];
 
 $correspondencias_paginas = ['autoanalisis', 'preparate', 'lenguaje_corporal', 'tienes_un_minuto', 'negociar', 'repasemos', 'llego_el_momento'];
+
+$cant_actividades_etapas = [0, 3, 1, 1, 1, 1, 0, 0];

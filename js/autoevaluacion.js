@@ -1,9 +1,8 @@
 $(document).ready(function () {
 
-    //Ordenar Lista
+    //Ordenar Lista 1
     $("#ordenar1").sortable();
     $("#ordenar1").disableSelection();
-
     $("#ordenar1 a").click(function () {
         $("#ordenar1 a").removeClass("active");
         if (!$(this).hasClass('block')) {
@@ -11,9 +10,9 @@ $(document).ready(function () {
         }
     });
 
+    //Ordenar Lista 2
     $("#ordenar2").sortable();
     $("#ordenar2").disableSelection();
-
     $("#ordenar2 a").click(function () {
         $("#ordenar2 a").removeClass("active");
         if (!$(this).hasClass('block')) {
@@ -56,8 +55,6 @@ $(document).ready(function () {
                 cache: "false",
                 success: function (resultado) {
 
-                    console.log(resultado);
-
                     var registro = JSON.parse(resultado);
 
                     //Si faltan hacer actividades, no se puede avanzar
@@ -67,37 +64,47 @@ $(document).ready(function () {
                     }
                     else {
 
+                        var mis_etapas = tamaño_breadcrumb() - 1;
+
                         $("html").animate({
                             scrollTop: 0
                         }, 800);
 
                         $("#error_etapa").fadeOut("fast");
 
-                        $("#contenido").fadeOut("slow", "swing", function () {
-                            $("#contenido").load("view/autoevaluacion/" + registro.etapa, cargar_etapa(registro.num_etapa));
-                            $("#contenido").fadeIn("slow");
+                        //Oculto mi etapa actual
+                        $(".actual").fadeOut("slow", "swing", function () {
+
+                            //Elimino mi estado actual
+                            $(".actual").removeClass("actual");
+                            $("#breadcrumb_autoevaluacion a").removeClass("etapa_actual");
+
+                            //Incremento mi indice
+                            indice++;
+
+                            //Si es una etapa nueva, la debo cargar
+                            if (mis_etapas < indice) {
+                                $("#etapa_" + indice).load("view/autoevaluacion/" + registro.etapa);
+                                $("#breadcrumb_autoevaluacion").append("<a id='enlace_etapa" + indice + "' data-hidden='" + indice + "' class='breadcrumb font_breadcrumb_big etapa_actual' onclick='ir_a(" + indice + ");'>" + registro.nombre_etapa + "</a>");
+                            }
+
+                            //Actualizo mi etapa actual
+                            $("#etapa_" + indice).addClass("actual");
+                            $("#enlace_etapa" + indice).addClass("etapa_actual");
+                            $("#etapa_" + indice).fadeIn("slow");
+
+                            //Si es necesario, cambio el tamaño de mi breadcrumb
+                            if (tamaño_breadcrumb() > 3) {
+                                $("#breadcrumb_autoevaluacion a").removeClass("font_breadcrumb_big");
+                                $("#breadcrumb_autoevaluacion a").addClass("font_breadcrumb_small");
+                            }
+
                         });
 
-                        indice++;
-
-                        $("#breadcrumb_autoevaluacion a").removeClass("etapa_actual");
-
-                        //Es necesario crear el enlace en caso de que sea la primera vez que se acede a la etapa
-
-                        if (!breadcrumb_incluye(registro.num_etapa)) {
-                            $("#breadcrumb_autoevaluacion").append("<a id='enlace_etapa" + indice + "' data-hidden='" + indice + "' class='breadcrumb font_breadcrumb_big etapa_actual' onclick='ir_a(" + indice + ");'>" + registro.nombre_etapa + "</a>");
-                        }
-                        else {
-
-                            //Sino solo debemos iluminar el enlace que ya esta creado
-
-                            $("#enlace_etapa" + indice).addClass("etapa_actual");
-
-                        }
-
-                        if (tamaño_breadcrumb() > 3) {
-                            $("#breadcrumb_autoevaluacion a").removeClass("font_breadcrumb_big");
-                            $("#breadcrumb_autoevaluacion a").addClass("font_breadcrumb_small");
+                        if (indice == 5) {
+                            $("#next_button").fadeOut("slow", "swing", function () {
+                                $("#finish_button").fadeIn("slow");
+                            });
                         }
 
                     }
@@ -136,25 +143,35 @@ $(document).ready(function () {
 
                     $("#error_etapa").fadeOut("fast");
 
-                    $("#contenido").fadeOut("slow", "swing", function () {
-                        $("#contenido").load("view/autoevaluacion/" + registro.etapa, cargar_etapa(registro.num_etapa));
-                        $("#contenido").fadeIn("slow");
+                    //Oculto mi etapa actual
+                    $(".actual").fadeOut("slow", "swing", function () {
+
+                        //Elimino mi estado actual
+                        $(".actual").removeClass("actual");
+                        $("#breadcrumb_autoevaluacion a").removeClass("etapa_actual");
+
+                        //Decremento mi indice
+                        indice--;
+
+                        //Actualizo mi etapa actual
+                        $("#etapa_" + indice).addClass("actual");
+                        $("#enlace_etapa" + indice).addClass("etapa_actual");
+                        $("#etapa_" + indice).fadeIn("slow");
+
                     });
-
-                    //$("#breadcrumb_autoevaluacion a").filter(":contains('" + registro.quitar + "')").remove();
-
-                    $("#breadcrumb_autoevaluacion a").removeClass("etapa_actual");
-                    $("#enlace_etapa" + registro.num_etapa).addClass("etapa_actual");
-
-                    indice--;
 
                 }
 
             });
 
+            if (indice == 6) {
+                $("#finish_button").fadeOut("slow", "swing", function () {
+                    $("#next_button").fadeIn("slow");
+                });
+            }
+
         }
     });
-
 
 });
 
@@ -281,8 +298,6 @@ function enviar_respuesta(id, recurso) {
         cache: "false",
         success: function (resultado) {
 
-            console.log(resultado);
-
             var registro = JSON.parse(resultado);
 
             if (registro.error) {
@@ -380,7 +395,6 @@ function seleccionar_ordenar(id, idFather) {
 
     }
 
-
 }
 
 
@@ -390,36 +404,33 @@ function cargar_etapa(num) {
 
     if (num < 5) {
 
-        var cant = [0, 3, 1, 1, 1, 1];
         var numero = num + 1;
 
         $.ajax({
             url: "controller/autoevaluacion/traer_etapa.php",
             method: "POST",
             cache: "false",
-            data: { 'etapa': numero, 'cant_actividades': cant[numero] },
+            data: { 'etapa': numero },
             success: function (resultado) {
-
-                console.log(resultado);
 
                 var registro = JSON.parse(resultado);
 
-                for (index = 0; index < cant[numero]; index++) {
+                for (index = 0; index < registro.cant_actividades; index++) {
 
                     num_actividad = index + 1;
 
                     if (registro.completada[index]) {
 
-                        mostrar_respuestas(registro.recurso[index], registro.respuestas["actividad_" + num_actividad]);
+                        mostrar_respuestas(registro.recurso[index], registro.respuestas["actividad_" + num_actividad], registro.id[index]);
 
                         if (registro.correcto[index]) {
 
-                            mostrar_correcto(registro.id[index]);
+                            mostrar_correcto("#" + registro.id[index]);
 
                         }
                         else {
 
-                            mostrar_incorrecto(registro.id[index], registro.solucion["actividad_" + num_actividad]);
+                            mostrar_incorrecto("#" + registro.id[index], registro.solucion["actividad_" + num_actividad]);
 
                         }
 
@@ -433,25 +444,22 @@ function cargar_etapa(num) {
 
     }
 
-    if (num == 6) {
-        progreso_finalizado();
-    }
-
 }
 
 // Muestra la respuesta y deshabilita los campos correspondientes
 
-function mostrar_respuestas(recurso, respuestas) {
+function mostrar_respuestas(recurso, respuestas, id) {
 
     switch (recurso) {
 
         case "vof":
 
-            $("#formulario_vof input").attr("checked", false);
+            $("#formulario_" + id + " input").attr("checked", false);
             jQuery.each(respuestas, function (i, val) {
                 $(val).attr("checked", true);
             });
-            $("#formulario_vof input").attr("disabled", true);
+
+            desactivar_recurso(recurso, id);
 
             break;
 
@@ -460,7 +468,7 @@ function mostrar_respuestas(recurso, respuestas) {
             jQuery.each(respuestas, function (i, val) {
                 $(val).attr("checked", true);
             });
-            $("#formulario_multiple input").attr("disabled", true);
+            desactivar_recurso(recurso, id);
 
             break;
 
@@ -468,20 +476,22 @@ function mostrar_respuestas(recurso, respuestas) {
 
             var index = 0;
             jQuery.each(respuestas, function (index, val) {
-                $(val).insertBefore($(respuestas[index + 1]));
+                if (index == 0) {
+                    $(val).insertBefore("#" + id + ":first-child");
+                }
+                else {
+                    $(val).insertAfter($(respuestas[index - 1]));
+                }
             });
-            $(respuestas[index]).insertBefore(respuestas[index + 1]);
-            $("#sortable").sortable();
-            $("#sortable").sortable("disable");
-            $("#sortable a").removeClass("active");
-            $("#sortable a").addClass("block");
+
+            desactivar_recurso(recurso, id);
 
             break;
 
         case "rellenar":
 
             var index = 0;
-            $("#formulario_rellenar input").each(function () {
+            $("#formulario_" + id + " input").each(function () {
                 $(this).val(respuestas.valor[index]);
                 if (respuestas.calificacion[index]) {
                     $(this).addClass("rellenar_correcto");
@@ -491,7 +501,7 @@ function mostrar_respuestas(recurso, respuestas) {
                 }
                 index++;
             });
-            $("#formulario_rellenar input").attr("disabled", true);
+            desactivar_recurso(recurso, id);
 
             break;
 
@@ -518,16 +528,9 @@ function calcular_progreso() {
 
 }
 
-function progreso_finalizado() {
-
-    $("#mi_porcentaje").empty();
-    $("#mi_porcentaje").append("100%");
-    $(".determinate").css("width", "100%");
-
-}
+//Carga que reanuda el recorrido del usuario
 
 function carga_inicial() {
-
 
     $.ajax({
         url: "controller/autoevaluacion/traer_inicial.php",
@@ -541,7 +544,7 @@ function carga_inicial() {
 
             var tamaño = registro.nombres.length;
 
-            //Configuro el breadcrumb
+            //Cargo el breadcrumb
 
             if (tamaño > 3) {
 
@@ -560,18 +563,12 @@ function carga_inicial() {
 
             $("#enlace_etapa0").addClass("etapa_actual");
 
-            /**********************************************************************************/
-
             //Cargo las paginas que ya recorri junto a sus respuestas
 
             jQuery.each(registro.paginas, function (index, val) {
-                $("#" + val).load("view/autoevaluacion/" + val + ".html");
+                $("#etapa_" + index).load("view/autoevaluacion/" + val + ".html");
                 cargar_etapa(index);
             });
-
-            /**********************************************************************************/
-
-
 
         }
     });
@@ -581,7 +578,8 @@ function carga_inicial() {
 
 function ir_a(etapa) {
 
-    var correspondencia_pagina = ['autoanalisis', 'preparate', 'lenguaje_corporal', 'tienes_un_minuto', 'negociar', 'repasemos', 'llego_el_momento'];
+    //Quito el mensaje de error (een caso que exista)
+    $("#error_etapa").fadeOut("fast");
 
     //Quito la marca actual del bread
     $("#breadcrumb_autoevaluacion a").removeClass("etapa_actual");
@@ -591,25 +589,23 @@ function ir_a(etapa) {
 
     $(".actual").fadeOut("slow", "swing");
     $(".actual").removeClass("actual");
-    $("#" + correspondencia_pagina[etapa]).addClass("actual");
+    $("#etapa_" + etapa).addClass("actual");
     $(".actual").fadeIn("slow");
 
+    if (etapa == 6) {
+        $("#next_button").fadeOut("slow", "swing", function () {
+            $("#finish_button").fadeIn("slow");
+        });
+    }
+    else {
+        $("#finish_button").fadeOut("slow", "swing", function () {
+            $("#next_button").fadeIn("slow");
+        });
+    }
+
 }
 
-function breadcrumb_incluye(indice) {
-
-    console.log("este es el parametro:" + indice);
-    var existe = false;
-    $("#breadcrumb_autoevaluacion a").each(function () {
-        var num = $(this).data("hidden");
-        console.log(num);
-        if (num == indice) {
-            existe = true;
-        }
-    });
-    console.log(existe);
-    return existe;
-}
+//Retorna la cantidad de etapa recorridas
 
 function tamaño_breadcrumb() {
 
@@ -618,8 +614,6 @@ function tamaño_breadcrumb() {
     $("#breadcrumb_autoevaluacion a").each(function () {
         tamaño++;
     });
-
-    console.log("tamaño " + tamaño);
 
     return tamaño;
 
@@ -633,17 +627,53 @@ function arriba(id) {
     item.insertBefore(before);
 }
 
-function abajo() {
+function abajo(id) {
     item = $("#" + id + " .active");
     after = item.next();
     item.insertAfter(after);
 }
 
-/*function desactivar() {
-    $("#sortable").sortable("disable");
-}*/
-/*
-function ordenar(item1, item2, item3) {
-    $(item1).insertBefore($(item2));
-    $(item3).insertAfter($(item2));
-}*/
+//Finalizar Autoevaluacion
+
+function finalizar() {
+
+    $.ajax({
+        url: "controller/autoevaluacion/finalizar.php",
+        method: "POST",
+        cache: "false",
+        success: function (resultado) {
+
+            var registro = JSON.parse(resultado);
+
+            console.log(resultado);
+
+            if (registro.fail) {
+                mostrar_error();
+            }
+            else {
+
+                //Modifico el bread
+                $("#breadcrumb_autoevaluacion").fadeOut("slow", "swing", function () {
+                    $("#breadcrumb_autoevaluacion").empty();
+                    $("#breadcrumb_autoevaluacion").append("<a class='breadcrumb font_breadcrumb_big etapa_actual'>Autoevaluación finalizada</a>");
+                    $("#breadcrumb_autoevaluacion").fadeIn("slow");
+                });
+
+                //Mostrar estadisticas, recomendacion y formulario
+                $("#resultado").load("view/autoevaluacion/final.html", function () {
+                    $("#etapa_6").fadeOut("slow", "swing", function () {
+                        $("#auto_options").remove();
+                        $("#resultado").fadeIn("slow");
+                    });
+                    $("#correctas").append(" "+registro.cant_correctas);
+                    if (registro.recomendacion) {
+                        $("#recomendacion").fadeIn("slow");
+                        $("#recomendacion").append("Te recomendamos volver a realizar las actividades.")
+                    }
+                });
+
+            }
+
+        }
+    });
+}

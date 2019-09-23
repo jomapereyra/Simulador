@@ -61,6 +61,16 @@ class Actividad
         return $datos['cantidad'];
     }
 
+    public function cant_correctas($id_recorrido)
+    {
+        $consulta = $this->db->prepare('SELECT COUNT(id_actividad) AS cantidad FROM actividad WHERE id_recorrido = :id AND correcto = true');
+        $consulta->bindParam(':id', $id_recorrido);
+        $consulta->execute();
+        $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+
+        return $datos['cantidad'];
+    }
+
     //GUARDA MI RESPUESTA EN LA BD
 
     public function crear_actividad($num_actividad, $etapa, $respuesta, $correcto, $id_recorrido)

@@ -1,90 +1,134 @@
-<form id="formulario_seguridad" onsubmit="validar_seguridad();">
+<div
+    class="card-panel blue lighten-4 z-depth-3">
 
-    <div class="input-field col s12">
-        <div class="flow-text">Cambio de contraseña</div>
-        <p>Para modificar su contraseña, primero debe enviarnos una solicitud ingresando su contraseña actual.</p>
-    </div>
+    {# Solicitud de Cambio #}
 
-    {# Contraseña Actual #}
+    <form id="formulario_seguridad" onsubmit="return validar_seguridad();">
 
-    <div class="input-field col s11">
-        <input data-hidden="contraseña_actual" id="contraseña_actual" maxlength="200" name="contraseña_actual" type="password">
-        <label for="contraseña_actual">Contraseña Actual</label>
-        <span class="helper-text red-text text-lighten-2 error" id="contraseña_actual_error"></span>
-    </div>
+        <fieldset>
 
-    <div class="input-field col s1 left-align boton_input">
-        <a class="btn-floating" onclick="mostrar_ocultar_contraseña_actual();">
-            <i class="large material-icons">remove_red_eye</i>
-        </a>
-    </div>
+            <legend class="sr-only">Cambio de contraseña - Solicitud</legend>
 
-    {# Boton para solicitar el cambio #}
+            <div class="input-field col s12">
+                <div class="flow-text">Cambio de contraseña</div>
+            </div>
 
-    <div class="input-field col s12">
-        <div class="right-align">
-            <button class="btn waves-effect waves-green accesible" id="seguridad_button" name="action" type="submit">
-                <i aria-hidden="true" class="material-icons right" focusable="false">email</i>Solicitar cambio
-            </button>
-        </div>
-    </div>
+            {# Mensaje de Error #}
 
-</form>
+            <div class="input-field col s12 ocultar accesible" id="mensaje_seguridad" tabindex="6"></div>
 
-<form id="formulario_codigo" onsubmit="validar_codigo();" hidden>
+            {# Contraseña Actual #}
 
-    <div class="input-field col s12">
-        <div class="flow-text">Nueva Contraseña</div>
-    </div>
+            <div class="input-field col s11">
+                <input aria-describedby="ayuda_actual" data-hidden="contraseña_actual" id="contraseña_actual" maxlength="200" name="contraseña_actual" type="password" aria-required="true" class="validate accesible" tabindex="7">
+                <label for="contraseña_actual">Ingrese su contraseña actual</label>
+                <span class="helper-text" id="ayuda_actual">Para modificar su contraseña, primero debe enviarnos una solicitud ingresando su contraseña actual.</span>
+                <span class="helper-text red-text text-lighten-2 error" id="contraseña_actual_error" role="alert"></span>
+            </div>
 
-    {# Contraseña Nueva #}
+            <div class="input-field col s1 left-align boton_input">
+                <button aria-label="Mostrar/ocultar contraseña" class="btn-floating accesible" onclick="mostrar_ocultar_contraseña_actual();" tabindex="8" type="button">
+                    <i aria-hidden="true" class="large material-icons" focusable="false">remove_red_eye</i>
+                </button>
+            </div>
 
-    <div class="input-field col s11">
-        <input data-hidden="contraseña" id="contraseña_nueva" maxlength="30" name="contraseña_nueva" type="password">
-        <label for="contraseña_nueva">Contraseña Nueva</label>
-        <span class="helper-text">La contraseña debe ser mayor de 8 caracteres e incluir al
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                menos
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                una letra mayúscula,una letra minúscula y un número</span>
-        <span class="helper-text red-text text-lighten-2 error" id="contraseña_nueva_error"></span>
-    </div>
+            {# Boton para solicitar el cambio #}
 
-    <div class="input-field col s1 left-align boton_input">
-        <a class="btn-floating" onclick="mostrar_ocultar_contraseña_nueva();">
-            <i class="large material-icons">remove_red_eye</i>
-        </a>
-    </div>
+            <div class="input-field col s12">
+                <div class="right-align">
+                    <button class="btn waves-effect waves-green accesible" id="seguridad_button" name="action" type="submit">
+                        <i aria-hidden="true" class="material-icons right" focusable="false">email</i>Solicitar cambio
+                    </button>
+                </div>
+            </div>
 
-    {# Confirmacion #}
+        </fieldset>
 
-    <div class="input-field col s12">
-        <input data-hidden="comparacion" id="comparacion" name="comparacion" type="password">
-        <label for="comparacion">Confirmar contraseña nueva</label>
-        <span class="helper-text red-text text-lighten-2 error" id="comparacion_error"></span>
-    </div>
+    </form>
 
-    {# Codigo de seguridad #}
+    {# Ingreso de Codigo #}
 
-    <div class="input-field col s12">
-        <div class="flow-text">Se ha enviado un codigo a su email.<br>Ingreselo a continuacion para poder realizar los cambios</div>
-    </div>
+    <form id="formulario_codigo" onsubmit="return validar_codigo();" hidden>
 
-    <div class="input-field col s12">
-        <i class="material-icons prefix">email</i>
-        <input class="validate" data-hidden="codigo" id="codigo" name="codigo" type="number">
-        <label for="codigo">Codigo de seguridad</label>
-        <span class="helper-text red-text text-lighten-2 error" id="codigo_error"></span>
-    </div>
+        <fieldset>
 
-    <div class="input-field col s12 ocultar" id="error_codigo"></div>
+            <legend class="sr-only">Cambio de contraseña - Confirmación</legend>
 
-    {# Boton para aplicar el cambio #}
+            <div class="input-field col s12">
+                <div class="flow-text">Nueva Contraseña</div>
+            </div>
 
-    <div class="input-field col s12">
-        <div class="right-align">
-            <button class="btn waves-effect waves-green accesible" id="codigo_button" name="action" type="submit">
-                <i aria-hidden="true" class="material-icons right" focusable="false">check</i>Aplicar cambio
-            </button>
-        </div>
-    </div>
+            {# Mensaje de Error #}
 
-</form>
+            <div class="input-field col s12 ocultar accesible" id="mensaje_codigo" tabindex="6"></div>
+
+            {# Contraseña Nueva #}
+
+            <div class="input-field col s11">
+                <input aria-describedby="ayuda_contraseña" aria-required="true" class="validate accesible" data-hidden="contraseña" id="contraseña_nueva" maxlength="30" name="contraseña_nueva" type="password" tabindex="7">
+                <label for="contraseña_nueva">Ingrese una contraseña nueva</label>
+                <span class="helper-text" id="ayuda_contraseña">La contraseña debe ser mayor de 8 caracteres e incluir al
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                menos
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                una letra mayúscula,una letra minúscula y un número</span>
+                <span class="helper-text red-text text-lighten-2 error" id="contraseña_nueva_error"></span>
+            </div>
+
+            <div class="input-field col s1 left-align boton_input">
+                <button aria-label="Mostrar/ocultar contraseña" class="btn-floating accesible" onclick="mostrar_ocultar_contraseña_nueva();" tabindex="8" type="button">
+                    <i aria-hidden="true" class="large material-icons" focusable="false">remove_red_eye</i>
+                </button>
+            </div>
+
+            {# Confirmacion #}
+
+            <div class="input-field col s12">
+                <input aria-required="true" class="validate accesible" data-hidden="comparacion" id="comparacion" name="comparacion" tabindex="9" type="password">
+                <label for="comparacion">Repita su contraseña nueva</label>
+                <span class="helper-text red-text text-lighten-2 error" id="comparacion_error" role="alert"></span>
+            </div>
+
+            {# Codigo de seguridad #}
+
+            <fieldset>
+
+                <legend class="sr-only">Código de seguridad</legend>
+
+                <div class="input-field col s12">
+                    <div class="flow-text">Se ha enviado un codigo a su email.<br>Ingreselo a continuacion para poder realizar los cambios.</div>
+                </div>
+
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">email</i>
+                    <input aria-describedby="ayuda_codigo" aria-required="true" class="validate accesible" data-hidden="codigo" id="codigo" name="codigo" type="number" tabindex="10">
+                    <label for="codigo">Codigo de seguridad</label>
+                    <div class="sr-only" id="ayuda_codigo">Se ha enviado un codigo a su email.Ingreselo a continuacion para poder realizar los cambios.</div>
+                    <span class="helper-text red-text text-lighten-2 error" id="codigo_error"></span>
+                </div>
+
+            </fieldset>
+
+            {# Boton para aplicar el cambio #}
+
+            <div class="input-field col s12">
+                <div class="right-align">
+                    <button class="btn waves-effect waves-green accesible" id="codigo_button" name="action" type="submit">
+                        <i aria-hidden="true" class="material-icons right" focusable="false">check</i>Aplicar cambio
+                    </button>
+                </div>
+            </div>
+
+            {# Boton de Cancelar #}
+
+            <div class="input-field col s12">
+                <div class="right-align">
+                    <button class="btn waves-effect waves-green accesible" type="button" onclick="cancelar_seguridad();">
+                        <i aria-hidden="true" class="material-icons right" focusable="false">cancel</i>Cancelar
+                    </button>
+                </div>
+            </div>
+
+        </fieldset>
+
+    </form>
+
+</div>

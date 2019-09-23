@@ -1,427 +1,468 @@
-<form id="formulario_editar" onsubmit="return validar_editar();">
+<div class="card-panel blue lighten-4 z-depth-3">
 
-    <div class="row">
+    <form id="formulario_editar" onsubmit="return validar_editar();">
 
-        <div class="col s12">
+        <div class="row">
 
-            <fieldset>
+            <div class="col s12">
 
-                <legend class="sr-only">Edicion de Perfil: en esta seccion usted puede modificar sus datos personales</legend>
+                <fieldset>
 
-                {# Nombre y Apellido #}
+                    <legend class="sr-only">Edicion de Perfil: en esta seccion usted puede modificar sus datos personales</legend>
 
-                <div class="input-field col s6">
-                    <input data-hidden="nombre" id="nombre" maxlength="30" name="nombre" type="text" value='{{nombre}}'>
-                    <label class="active" for="nombre">Nombre</label>
-                    <span class="helper-text red-text text-lighten-2 error" id="nombre_error"></span>
-                </div>
+                    {# Mensaje de Formulario #}
 
-                <div class="input-field col s6">
-                    <input data-hidden="apellido" id="apellido" maxlength="30" name="apellido" type="text" value='{{apellido}}'>
-                    <label class="active" for="apellido">Apellido</label>
-                    <span class="helper-text red-text text-lighten-2 error" id="apellido_error"></span>
-                </div>
+                    <div class="input-field col s12 ocultar accesible" id="mensaje_editar" tabindex="6"></div>
 
-                {# Correo #}
+                    {# Nombre y Apellido #}
 
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">email</i>
-                    <input data-hidden="correo" id="correo" maxlength="40" name="correo" type="text" value='{{correo}}'>
-                    <label class="active" for="correo">Correo</label>
-                    {#<span class="helper-text">El correo debe respetar el siguiente formato: "texto@dominio" donde dominio puede ser, por ejemplo, gmail.com</span>#}
-                    <span class="helper-text red-text text-lighten-2 error" id="correo_error"></span>
-                </div>
+                    <div class="input-field col s6">
+                        <input aria-required="true" class="validate accesible" data-hidden="nombre" id="nombre" maxlength="30" name="nombre" type="text" value='{{nombre}}' tabindex="7">
+                        <label for="nombre">Nombre</label>
+                        <span class="helper-text red-text text-lighten-2 error" id="nombre_error" role="alert"></span>
+                    </div>
 
-                {# Pregunta #}
+                    <div class="input-field col s6">
+                        <input aria-required="true" class="validate accesible" data-hidden="apellido" id="apellido" maxlength="30" name="apellido" type="text" value='{{apellido}}' tabindex="8">
+                        <label for="apellido">Apellido</label>
+                        <span class="helper-text red-text text-lighten-2 error" id="apellido_error" role="alert"></span>
+                    </div>
 
-                <div class="input-field col s12">
-                    <div class="flow-text">¿Es hipoacúsico de nacimiento o postlocutivo?</div>
-                </div>
+                    {# Correo #}
 
-                <div class="container">
+                    <div class="input-field col s12">
+                        <i aria-hidden="true" class="material-icons prefix">email</i>
+                        <input aria-describedby="ayuda_correo" aria-required="true" class="validate accesible" data-hidden="correo" id="correo" maxlength="40" name="correo" type="text" value='{{correo}}' tabindex="9">
+                        <label for="correo">Correo</label>
+                        <span class="helper-text" id="ayuda_correo">El correo debe respetar el siguiente formato: "texto@dominio" donde dominio puede ser, por ejemplo, gmail.com</span>
+                        <span class="helper-text red-text text-lighten-2 error" id="correo_error" role="alert"></span>
+                    </div>
 
-                    {% if hipoacusico_nacimiento == 'Soy hipoacúsico de nacimiento' %}
+                    {# Pregunta #}
 
-                        <div class="col s6">
-                            <p>
-                                <label for="hipoacusico">
-                                    <input id="hipoacusico" name="pregunta" type="radio" value="1" checked/>
-                                    <span>Soy hipoacúsico de nacimiento</span>
-                                </label>
-                            </p>
+                    <div class="input-field col s12">
+                        <div class="flow-text">¿Es hipoacúsico de nacimiento o postlocutivo?</div>
+                    </div>
+
+                    <fieldset>
+
+                        <legend class="sr-only">¿Es hipoacúsico de nacimiento o postlocutivo?</legend>
+
+                        <div class="col s12">
+
+                            {% if hipoacusico_nacimiento == 'Soy hipoacúsico de nacimiento' %}
+
+                                <p>
+                                    <label for="hipoacusico">
+                                        <input id="hipoacusico" name="pregunta" type="radio" value="1" checked class="accesible" tabindex="10"/>
+                                        <span>Soy hipoacúsico de nacimiento</span>
+                                    </label>
+                                </p>
+
+                                <p>
+                                    <label>
+                                        <input id="postlocutivo" name="pregunta" type="radio" value="0" class="accesible" tabindex="10"/>
+                                        <span>Soy postlocutivo</span>
+                                    </label>
+                                </p>
+
+                            {% else %}
+
+                                <p>
+                                    <label for="hipoacusico">
+                                        <input id="hipoacusico" name="pregunta" type="radio" value="1" class="accesible" tabindex="10"/>
+                                        <span>Soy hipoacúsico de nacimiento</span>
+                                    </label>
+                                </p>
+
+                                <p>
+                                    <label>
+                                        <input id="postlocutivo" name="pregunta" type="radio" value="0" checked class="accesible" tabindex="10"/>
+                                        <span>Soy postlocutivo</span>
+                                    </label>
+                                </p>
+
+                            {% endif %}
+
                         </div>
 
-                        <div class="col s6">
-                            <p>
-                                <label>
-                                    <input id="postlocutivo" name="pregunta" type="radio" value="0"/>
-                                    <span>Soy postlocutivo</span>
-                                </label>
-                            </p>
+                        <div class="col s12">
+                            <span class="helper-text red-text text-lighten-2 error" id="pregunta_error" role="alert"></span>
                         </div>
 
-                    {% else %}
+                    </fieldset>
 
-                        <div class="col s6">
-                            <p>
-                                <label for="hipoacusico">
-                                    <input id="hipoacusico" name="pregunta" type="radio" value="1"/>
-                                    <span>Soy hipoacúsico de nacimiento</span>
-                                </label>
-                            </p>
+                    {# Nivel educativo #}
+
+                    <div class="input-field col s12">
+                        <div class="flow-text">
+                            <i class="material-icons">school</i>
+                            Nivel educativo alcanzado
+                        </div>
+                    </div>
+
+                    <fieldset>
+
+                        <legend class="sr-only">Nivel educativo alcanzado</legend>
+
+                        {% if id_nivel == 1 %}
+
+                            <div class="col s12">
+                                <p>
+                                    <label>
+                                        <input id="Secundario" name="nivel" type="radio" value="1" checked class="accesible" tabindex="11"/>
+                                        <span>Secundario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Terciario" name="nivel" type="radio" value="2" class="accesible" tabindex="11"/>
+                                        <span>Terciario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Universitario" name="nivel" type="radio" value="3" class="accesible" tabindex="11"/>
+                                        <span>Universitario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Postgrado" name="nivel" type="radio" value="4" class="accesible" tabindex="11"/>
+                                        <span>Postgrado</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% elseif id_nivel == 2 %}
+
+                            <div class="col s12">
+                                <p>
+                                    <label>
+                                        <input id="Secundario" name="nivel" type="radio" value="1" class="accesible" tabindex="11"/>
+                                        <span>Secundario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Terciario" name="nivel" type="radio" value="2" checked class="accesible" tabindex="11"/>
+                                        <span>Terciario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Universitario" name="nivel" type="radio" value="3" class="accesible" tabindex="11"/>
+                                        <span>Universitario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Postgrado" name="nivel" type="radio" value="4" class="accesible" tabindex="11"/>
+                                        <span>Postgrado</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% elseif id_nivel == 3 %}
+
+                            <div class="col s12">
+                                <p>
+                                    <label>
+                                        <input id="Secundario" name="nivel" type="radio" value="1" class="accesible" tabindex="11"/>
+                                        <span>Secundario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Terciario" name="nivel" type="radio" value="2" class="accesible" tabindex="11"/>
+                                        <span>Terciario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Universitario" name="nivel" type="radio" value="3" checked class="accesible" tabindex="11"/>
+                                        <span>Universitario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Postgrado" name="nivel" type="radio" value="4" class="accesible" tabindex="11"/>
+                                        <span>Postgrado</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="col s12">
+                                <p>
+                                    <label>
+                                        <input id="Secundario" name="nivel" type="radio" value="1" class="accesible" tabindex="11"/>
+                                        <span>Secundario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Terciario" name="nivel" type="radio" value="2" class="accesible" tabindex="11"/>
+                                        <span>Terciario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Universitario" name="nivel" type="radio" value="3" class="accesible" tabindex="11"/>
+                                        <span>Universitario</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="Postgrado" name="nivel" type="radio" value="4" checked class="accesible" tabindex="11"/>
+                                        <span>Postgrado</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+                        <div class="col s12">
+                            <span class="helper-text red-text text-lighten-2 error" id="nivel_error" role="alert"></span>
                         </div>
 
-                        <div class="col s6">
-                            <p>
-                                <label>
-                                    <input id="postlocutivo" name="pregunta" type="radio" value="0" checked/>
-                                    <span>Soy postlocutivo</span>
-                                </label>
-                            </p>
+                    </fieldset>
+
+                    {# Lugar de residencia #}
+
+                    <div class="input-field col s12">
+                        <div class="flow-text">
+                            <i class="material-icons">location_on</i>
+                            Lugar de residencia
+                        </div>
+                    </div>
+
+                    <fieldset>
+
+                        <legend class="sr-only">Lugar de residencia</legend>
+
+                        {# Pais #}
+
+                        <div class="input-field col s12">
+                            <span id="pais_tittle">País</span>
+                            <select aria-required="true" class="browser-default accesible" aria-labelledby="pais_tittle" data-hidden="pais" id="pais" name="pais" tabindex="12">
+                                <option selected value={{id_pais}}>{{nombre_pais}}</option>
+                                {% for country in countries %}
+                                    <option value={{country.id_pais}}>{{country.nombre_pais}}</option>;
+                                {% endfor %}
+                            </select>
+                            <span class="helper-text red-text text-lighten-2 error" id="pais_error" role="alert"></span>
                         </div>
 
-                    {% endif %}
+                        {# Ciudad #}
 
+                        <div class="input-field col s12">
+                            <input aria-required="true" class="validate accesible" data-hidden="ciudad" id="ciudad" maxlength="40" name="ciudad" type="text" value='{{ciudad_residencia}}' tabindex="13">
+                            <label for="ciudad">Ciudad</label>
+                            <span class="helper-text red-text text-lighten-2 error" id="ciudad_error" role="alert"></span>
+                        </div>
 
-                    <div class="col s12">
-                        <span class="helper-text red-text text-lighten-2 error" id="pregunta_error"></span>
+                    </fieldset>
+
+                    {# Selector de grado #}
+
+                    <div class="input-field col s12">
+                        <div class="flow-text">Grado de hipoacusia
+                        </div>
                     </div>
 
-                </div>
+                    <fieldset>
 
-                {# Nivel educativo #}
+                        <legend class="sr-only">Grado de hipoacusia</legend>
 
-                <div class="input-field col s12">
+                        <div class="input-field col s12">
+                            <select aria-required="true" class="browser-default accesible" data-hidden="grado" id="grado" name="grado" tabindex="14">
+                                <option selected value={{id_grado}}>{{nombre_grado}}</option>
+                                <option value="1">Leve</option>
+                                <option value="2">Moderada</option>
+                                <option value="3">Severa</option>
+                            </select>
+                            <span class="helper-text red-text text-lighten-2 error" id="grado_error" role="alert"></span>
+                        </div>
 
-                    <div class="flow-text">
-                        <i class="material-icons">school</i>
-                        Nivel educativo alcanzado:
+                    </fieldset>
+
+                    {# Tipo de protesis #}
+
+                    <div class="input-field col s12">
+                        <div class="flow-text">Tipo de prótesis auditiva
+                        </div>
                     </div>
 
-                </div>
+                    <fieldset>
 
-                {% if id_nivel == 1 %}
+                        <legend class="sr-only">Tipo de prótesis auditiva</legend>
 
-                    <div class="col s12">
-                        <p>
-                            <label>
-                                <input id="Secundario" name="nivel" type="radio" value="1" checked/>
-                                <span>Secundario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Terciario" name="nivel" type="radio" value="2"/>
-                                <span>Terciario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Universitario" name="nivel" type="radio" value="3"/>
-                                <span>Universitario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Postgrado" name="nivel" type="radio" value="4"/>
-                                <span>Postgrado</span>
-                            </label>
-                        </p>
+                        {% if id_tipo == 1 %}
 
+                            <div class="col s12">
+
+                                <p>
+                                    <label>
+                                        <input id="1" name="tipo" type="radio" value="1" checked class="accesible" tabindex="15"/>
+                                        <span>Audífono</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="2" name="tipo" type="radio" value="2" class="accesible" tabindex="15"/>
+                                        <span>Audífono de alta gama</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="3" name="tipo" type="radio" value="3" class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de conducción ósea</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="4" name="tipo" type="radio" value="4" class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de estimulación electroacústica</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% elseif id_tipo == 2 %}
+
+                            <div class="col s12">
+
+                                <p>
+                                    <label>
+                                        <input id="1" name="tipo" type="radio" value="1" class="accesible" tabindex="15"/>
+                                        <span>Audífono</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="2" name="tipo" type="radio" value="2" checked class="accesible" tabindex="15"/>
+                                        <span>Audífono de alta gama</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="3" name="tipo" type="radio" value="3" class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de conducción ósea</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="4" name="tipo" type="radio" value="4" class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de estimulación electroacústica</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% elseif id_tipo == 3 %}
+
+                            <div class="col s12">
+
+                                <p>
+                                    <label>
+                                        <input id="1" name="tipo" type="radio" value="1" class="accesible" tabindex="15"/>
+                                        <span>Audífono</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="2" name="tipo" type="radio" value="2" class="accesible" tabindex="15"/>
+                                        <span>Audífono de alta gama</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="3" name="tipo" type="radio" value="3" checked class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de conducción ósea</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="4" name="tipo" type="radio" value="4" class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de estimulación electroacústica</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="col s12">
+
+                                <p>
+                                    <label>
+                                        <input id="1" name="tipo" type="radio" value="1" class="accesible" tabindex="15"/>
+                                        <span>Audífono</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="2" name="tipo" type="radio" value="2" class="accesible" tabindex="15"/>
+                                        <span>Audífono de alta gama</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="3" name="tipo" type="radio" value="3" class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de conducción ósea</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input id="4" name="tipo" type="radio" value="4" checked class="accesible" tabindex="15"/>
+                                        <span>Implante coclear de estimulación electroacústica</span>
+                                    </label>
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+                        <div class="input-field col s12">
+                            <span class="helper-text red-text text-lighten-2 error" id="tipo_error" role="alert"></span>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="input-field col s12 ocultar" id="error"></div>
+
+                    {# Boton de Guardar Cambios #}
+
+                    <div class="input-field col s12">
+                        <div class="right-align">
+                            <button class="btn waves-effect waves-green accesible" id="guardar_button" name="action" type="submit">
+                                <i aria-hidden="true" class="material-icons right" focusable="false">check</i>Guardar cambios
+                            </button>
+                        </div>
                     </div>
 
-                {% elseif id_nivel == 2 %}
+                    {# Boton de Cancelar #}
 
-                    <div class="col s12">
-                        <p>
-                            <label>
-                                <input id="Secundario" name="nivel" type="radio" value="1"/>
-                                <span>Secundario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Terciario" name="nivel" type="radio" value="2" checked/>
-                                <span>Terciario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Universitario" name="nivel" type="radio" value="3"/>
-                                <span>Universitario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Postgrado" name="nivel" type="radio" value="4"/>
-                                <span>Postgrado</span>
-                            </label>
-                        </p>
-
+                    <div class="input-field col s12">
+                        <div class="right-align">
+                            <button class="btn waves-effect waves-green accesible" id="cancel_button" type="button" onclick="cancelar_editar();">
+                                <i aria-hidden="true" class="material-icons right" focusable="false">cancel</i>Cancelar
+                            </button>
+                        </div>
                     </div>
 
-                {% elseif id_nivel == 3 %}
+                </fieldset>
 
-                    <div class="col s12">
-                        <p>
-                            <label>
-                                <input id="Secundario" name="nivel" type="radio" value="1"/>
-                                <span>Secundario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Terciario" name="nivel" type="radio" value="2"/>
-                                <span>Terciario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Universitario" name="nivel" type="radio" value="3" checked/>
-                                <span>Universitario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Postgrado" name="nivel" type="radio" value="4"/>
-                                <span>Postgrado</span>
-                            </label>
-                        </p>
-
-                    </div>
-
-                {% else %}
-
-                    <div class="col s12">
-                        <p>
-                            <label>
-                                <input id="Secundario" name="nivel" type="radio" value="1"/>
-                                <span>Secundario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Terciario" name="nivel" type="radio" value="2"/>
-                                <span>Terciario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Universitario" name="nivel" type="radio" value="3"/>
-                                <span>Universitario</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="Postgrado" name="nivel" type="radio" value="4" checked/>
-                                <span>Postgrado</span>
-                            </label>
-                        </p>
-
-                    </div>
-
-                {% endif %}
-
-                <div class="col s12">
-                    <span class="helper-text red-text text-lighten-2 error" id="nivel_error"></span>
-                </div>
-
-                {# Lugar de residencia #}
-
-                <div class="input-field col s12">
-                    <div class="flow-text">
-                        <i class="material-icons">location_on</i>
-                        Lugar de residencia
-                    </div>
-                </div>
-
-                <div class="input-field col s12">
-
-                    <select class="browser-default" data-hidden="pais" id="pais" name="pais">
-                        <option selected value={{id_pais}}>{{nombre_pais}}</option>
-                        {% for country in countries %}
-                            <option value={{country.id_pais}}>{{country.nombre_pais}}</option>;
-                        {% endfor %}
-                    </select>
-                    <span class="helper-text red-text text-lighten-2 error" id="pais_error"></span>
-
-                </div>
-
-                <div class="input-field col s12">
-                    <input data-hidden="ciudad" id="ciudad" maxlength="40" name="ciudad" placeholder="Ciudad" type="text" value='{{ciudad_residencia}}'>
-                    <span class="helper-text red-text text-lighten-2 error" id="ciudad_error"></span>
-                </div>
-
-                {# Selector de grado #}
-
-                <div class="input-field col s12">
-                    <div class="flow-text">Grado de hipoacusia:
-                    </div>
-                </div>
-
-                <div class="input-field col s12">
-                    <select class="browser-default" data-hidden="grado" id="grado" name="grado">
-                        <option selected value={{id_grado}}>{{nombre_grado}}</option>
-                        <option value="1">Leve</option>
-                        <option value="2">Moderada</option>
-                        <option value="3">Severa</option>
-                    </select>
-                    <span class="helper-text red-text text-lighten-2 error" id="grado_error"></span>
-                </div>
-
-                {# Tipo de protesis #}
-
-                <div class="input-field col s12">
-                    <div class="flow-text">Tipo de prótesis auditiva:
-                    </div>
-                </div>
-
-                {% if id_tipo == 1 %}
-
-                    <div class="col s12">
-
-                        <p>
-                            <label>
-                                <input id="1" name="tipo" type="radio" value="1" checked/>
-                                <span>Audífono</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="2" name="tipo" type="radio" value="2"/>
-                                <span>Audífono de alta gama</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="3" name="tipo" type="radio" value="3"/>
-                                <span>Implante coclear de conducción ósea</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="4" name="tipo" type="radio" value="4"/>
-                                <span>Implante coclear de estimulación electroacústica</span>
-                            </label>
-                        </p>
-
-                    </div>
-
-                {% elseif id_tipo == 2 %}
-
-                    <div class="col s12">
-
-                        <p>
-                            <label>
-                                <input id="1" name="tipo" type="radio" value="1"/>
-                                <span>Audífono</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="2" name="tipo" type="radio" value="2" checked/>
-                                <span>Audífono de alta gama</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="3" name="tipo" type="radio" value="3"/>
-                                <span>Implante coclear de conducción ósea</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="4" name="tipo" type="radio" value="4"/>
-                                <span>Implante coclear de estimulación electroacústica</span>
-                            </label>
-                        </p>
-
-                    </div>
-
-                {% elseif id_tipo == 3 %}
-
-                    <div class="col s12">
-
-                        <p>
-                            <label>
-                                <input id="1" name="tipo" type="radio" value="1"/>
-                                <span>Audífono</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="2" name="tipo" type="radio" value="2"/>
-                                <span>Audífono de alta gama</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="3" name="tipo" type="radio" value="3" checked/>
-                                <span>Implante coclear de conducción ósea</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="4" name="tipo" type="radio" value="4"/>
-                                <span>Implante coclear de estimulación electroacústica</span>
-                            </label>
-                        </p>
-
-                    </div>
-
-                {% else %}
-
-                    <div class="col s12">
-
-                        <p>
-                            <label>
-                                <input id="1" name="tipo" type="radio" value="1"/>
-                                <span>Audífono</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="2" name="tipo" type="radio" value="2"/>
-                                <span>Audífono de alta gama</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="3" name="tipo" type="radio" value="3"/>
-                                <span>Implante coclear de conducción ósea</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input id="4" name="tipo" type="radio" value="4" checked/>
-                                <span>Implante coclear de estimulación electroacústica</span>
-                            </label>
-                        </p>
-
-                    </div>
-
-                {% endif %}
-
-                <div class="input-field col s12">
-                    <span class="helper-text red-text text-lighten-2 error" id="tipo_error"></span>
-                </div>
-
-                <div class="input-field col s12 ocultar" id="error"></div>
-
-                {# Boton de Guardar Cambios #}
-
-                <div class="input-field col s12">
-                    <div class="right-align">
-                        <button class="btn waves-effect waves-green accesible" id="guardar_button" name="action" type="submit">
-                            <i aria-hidden="true" class="material-icons right" focusable="false">check</i>Guardar cambios
-                        </button>
-                    </div>
-                </div>
-
-            </fieldset>
+            </div>
 
         </div>
 
-    </div>
+    </form>
 
-</form>
+</div>

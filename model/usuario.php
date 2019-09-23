@@ -42,7 +42,7 @@ class Usuario
 
     public function get_datos_sidenav($usuario)
     {
-        $consulta = $this->db->prepare('SELECT nombre,apellido,correo,usuario FROM usuario WHERE usuario.usuario=:usuario');
+        $consulta = $this->db->prepare('SELECT id_usuario,nombre,apellido,correo,usuario FROM usuario WHERE usuario.usuario=:usuario');
         $consulta->bindParam(':usuario', $usuario);
         $consulta->execute();
         $datos = $consulta->fetch(PDO::FETCH_ASSOC);

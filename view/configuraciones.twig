@@ -2,20 +2,20 @@
 
 {% block content %}
 
-    <section class="col s10 offset-s1">
+    <section class="col m10 s12 offset-m1">
 
         <h4 class="title_margin accesible" tabindex="6">Configuraciones</h4>
 
         <div class="row">
             <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
                 <li class="tab">
-                    <a class="accesible" href="#mis_datos">Mis Datos</a>
+                    <a id="datos_tab" class="accesible" href="#mis_datos" tabindex="6">Mis Datos</a>
                 </li>
                 <li class="tab">
-                    <a class="accesible" href="#editar">Editar</a>
+                    <a id="editar_tab" class="accesible" href="#editar" tabindex="6">Editar</a>
                 </li>
                 <li class="tab">
-                    <a class="accesible" href="#seguridad">Seguridad</a>
+                    <a id="seguridad_tab" class="accesible" href="#seguridad" tabindex="6">Seguridad</a>
                 </li>
             </ul>
         </div>
@@ -28,7 +28,6 @@
         </div>
         <div id="seguridad" class="col s12">
             {% include "seguridad.twig" %}
-            {% include "codigo_seguridad.twig" %}
         </div>
 
     </section>
@@ -38,6 +37,9 @@
 {% block js %}
 
     {{ parent() }}
+
+    {# Funciones de formularios #}
+    <script src="js/formulario.js" type="text/javascript"></script>
 
     {# Editar Perfil #}
     <script src="js/editar.js" type="text/javascript"></script>

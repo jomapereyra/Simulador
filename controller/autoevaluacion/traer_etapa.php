@@ -1,5 +1,7 @@
 <?php
 
+require_once 'correspondencias.php';
+
 $resultado = [
     'etapa_1' => [
         'completada' => [false, false, false],
@@ -14,8 +16,9 @@ $resultado = [
             'actividad_2' => [],
             'actividad_3' => [],
         ],
-        'id' => ['#ordenar1', '#vof1', '#multiple'],
+        'id' => ['ordenar1', 'vof1', 'multiple'],
         'recurso' => ['ordenar', 'vof', 'multiple'],
+        'cant_actividades' => $cant_actividades_etapas[1],
     ],
 
     'etapa_2' => [
@@ -30,8 +33,9 @@ $resultado = [
         'solucion' => [
             'actividad_1' => [],
         ],
-        'id' => ['#rellenar'],
+        'id' => ['rellenar'],
         'recurso' => ['rellenar'],
+        'cant_actividades' => $cant_actividades_etapas[2],
     ],
 
     'etapa_3' => [
@@ -43,8 +47,9 @@ $resultado = [
         'solucion' => [
             'actividad_1' => [],
         ],
-        'id' => ['#vof2'],
+        'id' => ['vof2'],
         'recurso' => ['vof'],
+        'cant_actividades' => $cant_actividades_etapas[3],
     ],
 
     'etapa_4' => [
@@ -56,8 +61,9 @@ $resultado = [
         'solucion' => [
             'actividad_1' => [],
         ],
-        'id' => ['#ordenar2'],
+        'id' => ['ordenar2'],
         'recurso' => ['ordenar'],
+        'cant_actividades' => $cant_actividades_etapas[4],
     ],
 
     'etapa_5' => [
@@ -69,17 +75,16 @@ $resultado = [
         'solucion' => [
             'actividad_1' => [],
         ],
-        'id' => ['#vof3'],
+        'id' => ['vof3'],
         'recurso' => ['vof'],
+        'cant_actividades' => $cant_actividades_etapas[5],
     ],
 ];
 
 require_once '../../model/actividad.php';
 require_once '../../model/usuario.php';
 require_once '../../model/recorrido.php';
-require_once 'correspondencias.php';
 
-$cant = $_POST['cant_actividades'];
 $num_etapa = $_POST['etapa'];
 $nombre_etapa = 'etapa_'.$num_etapa;
 
@@ -92,7 +97,7 @@ $datos_usuario = $usuario->buscar_con_usuario($_SESSION['usuario']);
 //Agarro mi ultimo recorrido
 $ultimo_recorrido = $recorrido->traer_ultimo($datos_usuario['id_usuario']);
 
-for ($i = 0; $i < $cant; ++$i) {
+for ($i = 0; $i < $cant_actividades_etapas[$num_etapa]; ++$i) {
     $num_actividad = $i + 1;
     $nombre_actividad = 'actividad_'.$num_actividad;
 

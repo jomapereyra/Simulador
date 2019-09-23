@@ -105,6 +105,7 @@ switch ($etapa) {
                     } else {
                         $respuesta['solucion'] = $soluciones['etapa_1']['actividad_3'];
                     }
+                    $mi_respuesta = '';
                     foreach ($_POST['actitud'] as $seleccionado) {
                         $mi_respuesta = $mi_respuesta.$seleccionado.'-';
                     }
@@ -151,7 +152,7 @@ switch ($etapa) {
                 $respuesta['solucion'] = $soluciones['etapa_2']['actividad_1'];
             }
 
-            $mi_respuesta = $rellenar_1.'-'.$rellenar_2.'-'.$rellenar_3.'-'.$rellenar_4.'-'.$rellenar_5;
+            $mi_respuesta = $rellenar[1].'-'.$rellenar[2].'-'.$rellenar[3].'-'.$rellenar[4].'-'.$rellenar[5];
         } else {
             $respuesta['error'] = true;
         }
@@ -182,6 +183,7 @@ switch ($etapa) {
         }
         break;
     case '4':
+        $orden = json_decode($_POST['orden']);
         if (array_key_exists($orden[0], $correspondencias['etapa_4']['actividad_1']) && array_key_exists($orden[1], $correspondencias['etapa_4']['actividad_1']) && array_key_exists($orden[2], $correspondencias['etapa_4']['actividad_1']) && array_key_exists($orden[3], $correspondencias['etapa_4']['actividad_1']) && array_key_exists($orden[4], $correspondencias['etapa_4']['actividad_1']) && array_key_exists($orden[5], $correspondencias['etapa_4']['actividad_1']) && array_key_exists($orden[6], $correspondencias['etapa_4']['actividad_1'])) {
             if ($orden[0] == '3' && $orden[1] == '5' && $orden[2] == '1' && $orden[3] == '2' && $orden[4] == '4' && $orden[5] == '7' && $orden[6] == '6') {
                 $respuesta['correcto'] = 1;
@@ -223,12 +225,12 @@ if (!$respuesta['error']) {
     //ACA DEBERIA CHEQUEAR QUE LA ACTIVIDAD A CREAR NO SE HAYA CREADO ANTES
     //GUARDO MI RESPUESTA
     session_start();
-    $actividad = new Actividad();
+    $obj_actividad = new Actividad();
     $usuario = new Usuario();
     $recorrido = new Recorrido();
     $datos_usuario = $usuario->buscar_con_usuario($_SESSION['usuario']);
     $ultimo_recorrido = $recorrido->traer_ultimo($datos_usuario['id_usuario']);
-    $actividad->crear_actividad($actividad, $etapa, $mi_respuesta, $respuesta['correcto'], $ultimo_recorrido);
+    $obj_actividad->crear_actividad($actividad, $etapa, $mi_respuesta, $respuesta['correcto'], $ultimo_recorrido);
 }
 
 echo json_encode($respuesta);

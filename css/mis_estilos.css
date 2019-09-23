@@ -20,6 +20,10 @@
     padding-left: 30px !important;
 }
 
+select{
+    margin-top:10px;
+}
+
 .title_data{
     margin-left: 22px;
     margin-bottom: 30px;
@@ -29,16 +33,12 @@
     height: 1700px !important;
 }
 
-
-
 .contenido_panel{
     height:auto;
     overflow:visible;
     margin-left: 20px;
     margin-right: 20px;
 }
-
-
 
 .btn_settings{
     line-height: 0px !important;
@@ -54,7 +54,6 @@
 }
 
 
-
 .altura_500{
     height: 500px;
 }
@@ -63,12 +62,13 @@
     margin-right: 30px !important;
 }
 
+
 .sin_margin{
     margin: 0px !important;
 }
 
-.margin_autoevaluacion{
-    margin-top: 0px;
+.icon_message{
+    margin-right: 10px;
 }
 
 .margin_20{
@@ -131,8 +131,6 @@ main{
     font-size: 20px;
 }
 
-/************************************************************************************/
-
 /********************* Configuracion Responsive **************************************/
 
 @media only screen and (max-width : 992px) {
@@ -155,15 +153,18 @@ main{
     }
 }
 
-/************************************************************************************/
-
 /***************************** Accesibilidad Web ***********************************/
 
-fieldset { border:0px }
+fieldset { border:0px; padding: 0px; }
 
 input:focus, a:focus, button:focus, select:focus, span:focus{
     outline: 2px solid rgb(221, 102, 66) !important;
     background-color: coral !important;
+}
+
+div:focus{
+    background-color: coral !important;
+    outline: 2px solid rgb(221, 102, 66) !important;
 }
 
 .tab a:focus{
@@ -178,9 +179,12 @@ input:focus, a:focus, button:focus, select:focus, span:focus{
     overflow: hidden;
 }
 
-/*******************************************************************************/
 
 /************************ Autoevaluacion *****************************************/
+
+.margin_autoevaluacion{
+    margin-top: 0px;
+}
 
 /*********************** Rellenar **************************************/
 
@@ -220,8 +224,6 @@ input:focus, a:focus, button:focus, select:focus, span:focus{
 .etapa_actual.font_breadcrumb_big{
     font-size:27px !important;
 }
-
-
 
 
 /****************************************************************************/
