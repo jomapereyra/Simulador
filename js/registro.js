@@ -176,7 +176,6 @@ $(document).ready(function () {
 
 });
 
-
 //Para que sea accesible deberia avisarle al usuario de los cambios
 function contraseña_registro() {
 
@@ -198,6 +197,8 @@ function validar_registro() {
             $("#registro_button").append("Cargando...");
         },
         success: function (resultado) {
+
+            console.log(resultado);
 
             var registro = JSON.parse(resultado);
 
@@ -382,12 +383,19 @@ function validar_registro() {
 
             // Respuesta Conclusion
             if (registro.fail) {
-                mostrar_mensaje_formulario("#mensaje_registro","error");
+                mostrar_mensaje_formulario("#mensaje_registro", "error");
                 $("#registro_button").empty();
                 $("#registro_button").append("Registrarse<i class='material-icons right'>send</i>");
             }
             else {
-                $(location).attr("href", registro.url);
+                if (registro.correo_no_enviado) {
+                    mostrar_mensaje_formulario("#mensaje_registro", "error",registro.correo_error);
+                    $("#registro_button").empty();
+                    $("#registro_button").append("Registrarse<i class='material-icons right'>send</i>");
+                }
+                else {
+                    $(location).attr("href", registro.url);
+                }
             }
 
         }

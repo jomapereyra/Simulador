@@ -35,6 +35,8 @@ $resultado = [
     'ciudad_max' => false,
     'fail' => false,
     'url' => '',
+    'correo_error' => '',
+    'correo_no_enviado' => false,
 ];
 
 require_once '../model/usuario.php';
@@ -213,17 +215,21 @@ if (empty($ciudad)) {
 
 if (!in_array(true, $resultado)) {
     require_once '../model/correo.php';
-    require_once '../model/config.php';
+    require '../model/config.php';
     $resultado['url'] = $dns;
     $sender = new Correo();
     $contraseña = password_hash($contraseña, PASSWORD_DEFAULT, ['cost' => 10]);
     $codigo = str_shuffle($nombre_usuario);
     $id_activacion = md5($codigo);
-    $usuario->crear($nombre, $apellido, $correo, $ciudad, $pregunta, $nombre_usuario, $contraseña, $id_activacion, $nivel_id, $pais_id, $grado_id, $tipo_id);
-    $sender->enviar_activacion($correo, $nombre_usuario, $id_activacion);
-    session_start();
-    $_SESSION['usuario'] = $nombre_usuario;
-    $_SESSION['activate'] = false;
+    $resultado_correo = $sender->enviar_activacion($correo, $nombre_usuario, $id_activacion);
+    if ($resultado_correo['enviado']) {
+        $usuario->crear($nombre, $apellido, $correo, $ciudad, $pregunta, $nombre_usuario, $contraseña, $id_activacion, $nivel_id, $pais_id, $grado_id, $tipo_id);
+        session_start();
+        $_SESSION['usuario'] = $nombre_usuario;
+    } else {
+        $resultado['correo_error'] = $resultado_correo['contenido'];
+        $resultado['correo_no_enviado'] = true;
+    }
 } else {
     $resultado['fail'] = true;
 }

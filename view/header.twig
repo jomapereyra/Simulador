@@ -1,19 +1,19 @@
 {% block header %}
 
-    <div class="col m6 ocultar" id="page_title">
-        <h2 class="flow-text h-margin">Simulador de entrevista de trabajo para hipoacúsicos</h2>
+    <div class="col m6" id="page_title" hidden>
+        <h2 class="flow-text">Simulador de entrevista de trabajo para hipoacúsicos</h2>
     </div>
 
     <header id='encabezado'>
 
-        <div class="row sin_margin valign-wrapper">
+        <div class="row m-0 valign-wrapper">
 
-            <div class="col m3 title-header accesible" tabindex="1">
-                <h3 class="flow-text h-margin">Simulador de entrevista de trabajo para hipoacúsicos</h3>
+            <div class="col m8 hide-on-small-only">
+                <h4 class="title-header">Simulador de entrevista de trabajo <br> para hipoacúsicos</h4>
             </div>
 
-            <div class="col s12 m9 right-align icon-header" >
-                <a href="index.php" class="accesible" tabindex="2"><img src="img/logo_completo.png" alt="logo del sitio"></a>
+            <div class="col s12 m4 right-align icon-header">
+                <a href="index.php" tabindex="-1"><img src="img/logo_completo.png" alt="Logo del sitio" class="responsive-img"></a>
             </div>
 
 
@@ -24,7 +24,7 @@
         {% if mode == 0 %}
 
             <nav id="nav_header">
-                <div class="nav-wrapper margin_nav">
+                <div class="nav-wrapper mx-2">
                     <a id="menu_sitio" class="sidenav-trigger accesible" data-target="menu-login" href="#" tabindex="3" aria-label="Menu">
                         <i class="material-icons" aria-hidden="true" focusable="false">menu</i>
                     </a>
@@ -69,7 +69,7 @@
             {# Navbar Principal #}
 
             <nav id="nav_header">
-                <div class="nav-wrapper margin_nav">
+                <div class="nav-wrapper mx-2">
                     <a id="menu_sitio" class="sidenav-trigger accesible" data-target="menu-principal" href="#" tabindex="3" aria-label="Menu">
                         <i class="material-icons" aria-hidden="true" focusable="false">menu</i>
                     </a>

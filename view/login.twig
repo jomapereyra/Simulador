@@ -1,163 +1,158 @@
 {% extends "base.twig" %}
 
-{% block content %}
+{% block main %}
 
     {# Formulario #}
 
-    <div class="row">
+    <div
+        class="col s12 m8 l4 offset-m2 offset-l4">
 
-        <div
-            class="col s12 m8 l4 offset-m2 offset-l4">
+        {# Encabezado Formulario #}
 
-            {# Encabezado Formulario #}
+        <div class="row">
+            <h5 class="center-align">Antes de comenzar debe iniciar sesión</h5>
+        </div>
 
-            <div class="row accesible" tabindex="5">
-                <h4 class="center-align light-blue-text text-darken-4 bold">Antes de comenzar debe iniciar sesión</h4>
-            </div>
+        <div class="card-panel white z-depth-1">
 
-            <div class="card-panel blue lighten-4 z-depth-3">
+            <form id="formulario_login" onsubmit="return validar_login();" autocomplete="off">
 
-                <form id="formulario_login" onsubmit="return validar_login();" autocomplete="off">
+                <div class="row m-0">
 
-                    <div class="row">
+                    <fieldset>
 
-                        <fieldset>
+                        <legend class="sr-only">Panel de inicio de sesión</legend>
 
-                            <legend class="sr-only">Panel de inicio de sesión</legend>
+                        {# Mensaje del formulario #}
 
-                            {# Mensaje del formulario #}
+                        <div class="input-field col s12 mb-2 accesible" id="mensaje_login" tabindex="6" hidden></div>
 
-                            <div class="input-field col s12 ocultar" id="mensaje_login" tabindex="6"></div>
-
-                            {# Usuario #}
-
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix" aria-hidden="true" focusable="false">account_box</i>
-                                <input class="validate accesible" data-hidden="usuario" id="usuario" name="usuario" type="text" aria-required="true" tabindex="7">
-                                <label for="usuario">Ingrese su usuario</label>
-                                <span class="helper-text red-text text-lighten-2 error" id="usuario_error" role="alert"></span>
-                            </div>
-
-                            {# Contraseña #}
-
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix" aria-hidden="true" focusable="false">vpn_key</i>
-                                <input class="validate accesible" data-hidden="contraseña" id="contraseña" name="contraseña" type="password" aria-required="true" tabindex="8">
-                                <label for="contraseña">Ingrese su contraseña</label>
-                                <span class="helper-text red-text text-lighten-2 error" id="contraseña_error" role="alert"></span>
-                            </div>
-
-                        </fieldset>
-
-                        {# Boton de Ingresar #}
+                        {# Usuario #}
 
                         <div class="input-field col s12">
-                            <div class="right-align">
-                                <button class="btn waves-effect waves-light accesible" id="login_button" name="submit" type="submit">
-                                    Ingresar<i class="material-icons right" aria-hidden="true" focusable="false">send</i>
-                                </button>
-                            </div>
+                            <i class="material-icons prefix" aria-hidden="true" focusable="false">account_box</i>
+                            <input class="validate accesible" data-hidden="usuario" id="usuario" name="usuario" type="text" aria-required="true" tabindex="7">
+                            <label for="usuario">Ingrese su usuario</label>
+                            <span class="helper-text error" id="usuario_error" role="alert"></span>
                         </div>
 
+                        {# Contraseña #}
 
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix" aria-hidden="true" focusable="false">vpn_key</i>
+                            <input class="validate accesible" data-hidden="contraseña" id="contraseña" name="contraseña" type="password" aria-required="true" tabindex="8">
+                            <label for="contraseña">Ingrese su contraseña</label>
+                            <span class="helper-text error" id="contraseña_error" role="alert"></span>
+                        </div>
+
+                    </fieldset>
+
+                    {# Boton de Ingresar #}
+
+                    <div class="input-field col s12">
+                        <div class="right-align">
+                            <button class="btn waves-effect waves-light accesible" id="login_button" name="submit" type="submit">
+                                Ingresar<i class="material-icons right" aria-hidden="true" focusable="false">send</i>
+                            </button>
+                        </div>
                     </div>
 
-                </form>
 
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="left-align">
+            <h6>
+                <a href="recuperar.php" class="accesible">¿Olvido su contraseña?</a>
+            </h6>
+        </div>
+
+    </div>
+
+    {# Boton Info #}
+
+    <div class="fixed-action-btn direction-top active">
+        <a class="waves-effect waves-light btn-large btn-floating pulse modal-trigger accesible" href="#info" aria-label="Mostar información del sitio" id="info-button">
+            <i class="material-icons" aria-hidden="true" focusable="false">help_outline</i>
+        </a>
+    </div>
+
+    {# Modal Info #}
+
+    <div
+        class="modal modal-fixed-footer" id="info" role="dialog" aria-modal="true">
+
+        {# Contenido Modal #}
+
+        <div class="modal-content" focusable="true">
+
+            <h4 tabindex="-1" id="info-tittle">Info</h4>
+
+            <div class="col s12" tabindex="9">
+                <div class="card-panel teal">
+
+                    <h5 class="valign-wrapper">
+                        <i class="material-icons" aria-hidden="true" focusable="false">people</i>
+                        <b>&nbsp; Destinatarios</b>
+                    </h5>
+                    <p>
+                        Adultos activos entre 20 y 45 años con distintos grados de hipoacusia (pérdida auditiva) que utilizan dispositivos auditivos
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                (audífonos e implantes cocleares) con formación profesional o técnica que se postulen a una selección laboral y 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                necesiten mejorar sus habilidades comunicativas en una situación de entrevista laboral.
+                    </p>
+
+                </div>
             </div>
 
-            <div class="left-align">
-                <h6>
-                    <a href="recuperar.php" class="accesible">¿Olvido su contraseña?</a>
-                </h6>
+
+            <div class="col s12" tabindex="10">
+                <div class="card-panel teal">
+
+                    <h5 class="valign-wrapper">
+                        <i class="material-icons" aria-hidden="true" focusable="false">content_paste</i>
+                        <b>&nbsp;Requisitos</b>
+                    </h5>
+
+                    <p>
+                        Tener conocimientos básicos de navegación por Internet y buena predisposición para modificar conductas comunicacionales.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col s12" tabindex="11">
+                <div class="card-panel teal">
+
+                    <h5 class="valign-wrapper">
+                        <i class=" material-icons" aria-hidden="true" focusable="false">info</i>
+                        <b>&nbsp;Objetivos</b>
+                    </h5>
+
+                    <p>Objetivo general:</p>
+                    <p>
+                        - Desarrollar estrategias comunicacionales efectivas en la situación de entrevista laboral.
+                    </p>
+                    <p>Objetivos específicos:</p>
+                    <p>
+                        - Favorecer la acumulación de en la toma de decisiones de respuestas acertadas en una entrevista laboral.<br>
+                        - Practicar la aplicación de técnicas comunicacionales eficaces en una entrevista laboral.<br>
+                        - Adquirir destrezas tecnológicas, como ser, el manejo de recursos educativos abiertos incorporados en la experiencia educativa de todo en la vida (
+                        <i>long life learning</i>)
+                    </p>
+
+                </div>
             </div>
 
         </div>
 
-        {# Boton Info #}
+        {# Footer Modal #}
 
-        <div class="fixed-action-btn direction-top active">
-            <a class="waves-effect waves-light btn-large btn-floating pulse modal-trigger accesible" href="#info" aria-label="Mostar información del sitio" id="info-button">
-                <i class="material-icons" aria-hidden="true" focusable="false">help_outline</i>
-            </a>
+        <div class="modal-footer" tabindex="12">
+            <button class="modal-close waves-effects waves-red btn-flat" aria-label="Salir">Salir</button>
         </div>
-
-        {# Modal Info #}
-
-        <div
-            class="modal modal-fixed-footer" id="info" role="dialog" aria-modal="true">
-
-            {# Contenido Modal #}
-
-            <div class="modal-content" focusable="true">
-
-                <h4 tabindex="-1" id="info-tittle">Info</h4>
-
-                <div class="col s12" tabindex="9">
-                    <div class="card-panel teal">
-
-                        <h5 class="valign-wrapper">
-                            <i class="material-icons" aria-hidden="true" focusable="false">people</i>
-                            <b>&nbsp; Destinatarios</b>
-                        </h5>
-                        <p>
-                            Adultos activos entre 20 y 45 años con distintos grados de hipoacusia (pérdida auditiva) que utilizan dispositivos auditivos
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        (audífonos e implantes cocleares) con formación profesional o técnica que se postulen a una selección laboral y 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        necesiten mejorar sus habilidades comunicativas en una situación de entrevista laboral.
-                        </p>
-
-                    </div>
-                </div>
-
-
-                <div class="col s12" tabindex="10">
-                    <div class="card-panel teal">
-
-                        <h5 class="valign-wrapper">
-                            <i class="material-icons" aria-hidden="true" focusable="false">content_paste</i>
-                            <b>&nbsp;Requisitos</b>
-                        </h5>
-
-                        <p>
-                            Tener conocimientos básicos de navegación por Internet y buena predisposición para modificar conductas comunicacionales.
-                        </p>
-
-                    </div>
-                </div>
-
-                <div class="col s12" tabindex="11">
-                    <div class="card-panel teal">
-
-                        <h5 class="valign-wrapper">
-                            <i class=" material-icons" aria-hidden="true" focusable="false">info</i>
-                            <b>&nbsp;Objetivos</b>
-                        </h5>
-
-                        <p>Objetivo general:</p>
-                        <p>
-                            - Desarrollar estrategias comunicacionales efectivas en la situación de entrevista laboral.
-                        </p>
-                        <p>Objetivos específicos:</p>
-                        <p>
-                            - Favorecer la acumulación de en la toma de decisiones de respuestas acertadas en una entrevista laboral.<br>
-                            - Practicar la aplicación de técnicas comunicacionales eficaces en una entrevista laboral.<br>
-                            - Adquirir destrezas tecnológicas, como ser, el manejo de recursos educativos abiertos incorporados en la experiencia educativa de todo en la vida (
-                            <i>long life learning</i>)
-                        </p>
-
-                    </div>
-                </div>
-
-            </div>
-
-            {# Footer Modal #}
-
-            <div class="modal-footer" tabindex="12">
-                <button class="modal-close waves-effects waves-red btn-flat" aria-label="Salir">Salir</button>
-            </div>
-
-        </div>
-
 
     </div>
 

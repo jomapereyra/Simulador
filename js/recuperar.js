@@ -1,78 +1,21 @@
 $(document).ready(function () {
 
-    var mensajes_error = {
-        "campo": "Este campo no debe estar vacio",
-    };
-
-    $("#correo").keyup(function () {
+    $("#correo").change(function () {
         var valor = $("#correo").val();
         if (valor == "") {
-            mostrar_advertencia("#correo_error", "#correo", mensajes_error["campo"], 0);
+            mostrar_mensaje_campo("#correo", mensajes_error["campo"]);
         }
         else {
-            exitoso("#correo");
-            limpiar_todo();
+            ocultar_mensaje_campo("#correo");
         }
 
     })
 
 });
 
-function enviar_error(mensaje) {
-    $("#error").empty();
-    var html = "<div class='card-panel red lighten-1'><span class='white-text valign-wrapper'style='font-weight: bold'><div class='col s2 center-align'><i class='small material-icons'>error</i></div><div class='col s10'>" + mensaje + "</div></span></div>";
-    $("#error").append(html);
-    $("#error").fadeIn();
-}
-
-function limpiar_error() {
-    $("#error").empty();
-    $("#error").fadeOut();
-}
-
-function limpiar_todo() {
-    limpiar_error();
-    $("#correo_error").empty();
-}
-
-function exitoso(elemento) {
-    $(elemento).css("border-bottom", "1px solid #4CAF50");
-    $(elemento).css("box-shadow", "0 1px 0 0 #4CAF50");
-}
-
-function fallido(elemento) {
-    $(elemento).css("border-bottom", "1px solid #ee6e73");
-    $(elemento).css("box-shadow", "0 1px 0 0 #ee6e73");
-}
-
-function todo_fallido() {
-    fallido("#correo");
-}
-
-function mostrar_advertencia(id_error, id_elemento, mensaje) {
-    $(id_error).empty();
-    $(id_error).append(mensaje);
-    $(id_error).fadeIn();
-    fallido(id_elemento);
-}
-
-function enviar_notificacion(mensaje) {
-    $("#panel_error").remove();
-    var html = "<div id='panel_error' class='card-panel green lighten-1'><span class='white-text valign-wrapper'style='font-weight: bold'><div class='col s2 center-align'><i class='small material-icons'>email</i></div><div class='col s10'>" + mensaje + "</div></span></div>";
-    $("#error").append(html);
-    $("#error").fadeIn();
-}
-
 function validar_recuperar() {
 
-    var mensaje_error = {
-        "campo": "Este campo no debe estar vacio",
-        "existe": "El correo ingresado no se encuentra registrado.",
-        "enviado": "Se ha enviado un mensaje a su correo electrónico con los pasos para cambiar su contraseña.",
-        "basico": "Existen algunos errores que deben corregirse. Asegurese de ingresar bien los datos",
-    };
-
-    limpiar_todo();
+    ocultar_todo(["#correo"], "#mensaje_recuperar");
 
     $.ajax({
         url: "controller/recuperar_usuario.php",
@@ -84,41 +27,129 @@ function validar_recuperar() {
         },
         success: function (resultado) {
 
-            window.setTimeout(function () {
+            console.log(resultado);
 
-                var recuperar = JSON.parse(resultado);
+            var registro = JSON.parse(resultado);
 
+            //Respuesta de Correo
+
+            if (registro.correo_campo) {
+                mostrar_mensaje_campo("#correo", mensajes_error["campo"]);
+            } else {
+                exitoso("#correo");
+            }
+
+            //Respuesta del Formulario
+
+            if (registro.fail) {
+                mostrar_mensaje_formulario("#mensaje_recuperar", "error");
                 $("#recuperar_button").empty();
                 $("#recuperar_button").append("Solicitar<i class='material-icons right'>send</i>");
-
-                //Respuesta de Usuario
-
-                if (recuperar.campo) {
-                    mostrar_advertencia("#correo_error", "#correo", mensaje_error["campo"], 0);
-                } else {
-                    exitoso("#correo");
-                }
-
-                //Respuesta del intento
-
-                if (recuperar.check) {
-                    enviar_error(mensaje_error["basico"]);
+            }
+            else {
+                if (registro.correo_no_enviado) {
+                    mostrar_mensaje_formulario("#mensaje_recuperar", "error", registro.correo_error);
+                    $("#recuperar_button").empty();
+                    $("#recuperar_button").append("Solicitar<i class='material-icons right'>send</i>");
                 }
                 else {
-                    if (recuperar.existe) {
-                        enviar_error(mensaje_error["existe"]);
-                    }
-                    else {
-                        enviar_notificacion(mensaje_error["enviado"]);
-                        $("#recuperar_button").addClass("disabled");
-                    }
+                    ocultar_mensaje_formulario("#mensaje_recuperar");
+                    $("#formulario_recuperar").fadeOut("slow", "swing", function () {
+                        $("#correo_replik").val($("#correo").val());
+                        $("#formulario_codigo").fadeIn("slow", "swing", function () {
+                            $("#contraseña_nueva").focus();
+                        });
+                    });
                 }
-
-            }, 1000);
+            }
 
         }
+
     });
 
     return false;
 
 }
+
+function validar_codigo() {
+
+    ocultar_todo(["#contraseña_nueva", "#comparacion", "#codigo"], "#mensaje_codigo");
+
+    $.ajax({
+        url: "controller/codigo_recuperar.php",
+        method: "POST",
+        data: $('#formulario_codigo').serialize(),
+        cache: "false",
+        beforeSend: function () {
+            $("#codigo_button").empty();
+            $("#codigo_button").append("Validando...");
+        },
+        success: function (resultado) {
+
+            console.log(resultado);
+
+            var registro = JSON.parse(resultado);
+
+            // Respuesta de Contraseña Nueva
+
+            if (registro.contraseña_campo) {
+                mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["campo"]);
+            }
+            else {
+                if (registro.contraseña_max) {
+                    mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["largo"], 30);
+                }
+                else {
+                    if (registro.contraseña_min) {
+                        mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["corto"], 8);
+                    }
+                    else {
+                        if (registro.contraseña_formato) {
+                            mostrar_mensaje_campo("#contraseña_nueva", mensajes_error["regex"]);
+                        }
+                        else {
+                            if (registro.contraseña_coincide) {
+                                mostrar_mensaje_campo("#comparacion", mensajes_error["contraseña"]);
+                            }
+                            else {
+                                exitoso("#contraseña_nueva");
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Respuesta del codigo
+
+            if (registro.codigo) {
+                mostrar_mensaje_campo("#codigo", mensajes_error["codigo"]);
+            }
+            else {
+                exitoso("#codigo");
+            }
+
+            // Respuesta Conclusion
+
+            if (registro.fail) {
+                mostrar_mensaje_formulario("#mensaje_codigo", "error");
+            }
+            else {
+                if (registro.correo_no_enviado) {
+                    mostrar_mensaje_formulario("#mensaje_codigo", "error", registro.correo_error);
+                }
+                else {
+                    mostrar_mensaje_formulario("#mensaje_codigo", "exito");
+                    $("#codigo_button").attr("disabled", true);
+                }
+            }
+            $("#codigo_button").empty();
+            $("#codigo_button").append("<i class='material-icons left'>check</i>Aplicar cambio");
+
+        }
+
+    });
+
+    return false;
+
+}
+

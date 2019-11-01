@@ -1,5 +1,17 @@
 {% extends "base.twig" %}
 
+{% block main %}
+
+    <section class="col s10 offset-s1">
+
+        <h5 class="my-1 accesible bold borde-titulo" tabindex="6">{% block content_title %}{% endblock %}</h5>
+
+        {% block content %}{% endblock %}
+
+    </section>
+
+{% endblock %}
+
 {% block js %}
 
     {{ parent() }}

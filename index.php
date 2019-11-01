@@ -59,8 +59,12 @@ else {
 
     //Agrego la notificacion de activacion de cuenta si es necesario
 
-    if (!$_SESSION['activate']) {
+    $activado = $usuario->get_activado($_SESSION['usuario']);
+
+    if (!$activado) {
         $datos += ['not_activate' => true];
+    } else {
+        $datos += ['not_activate' => false];
     }
 
     echo $viewer->twig->render($page.'.twig', $datos);

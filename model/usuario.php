@@ -50,6 +50,16 @@ class Usuario
         return $datos;
     }
 
+    public function get_activado($usuario)
+    {
+        $consulta = $this->db->prepare('SELECT status FROM usuario WHERE usuario.usuario=:usuario');
+        $consulta->bindParam(':usuario', $usuario);
+        $consulta->execute();
+        $datos = $consulta->fetch(PDO::FETCH_ASSOC);
+
+        return $datos['status'];
+    }
+
     //TRAE LOS DATOS DE LA TABLA USUARIO A PARTIR DE UN NOMBRE DE USUARIO
 
     public function buscar_con_usuario($usuario)
@@ -100,6 +110,16 @@ class Usuario
         $consulta = $this->db->prepare('UPDATE usuario SET contraseña=:pass WHERE usuario = :user');
         $consulta->bindParam(':pass', $contraseña);
         $consulta->bindParam(':user', $usuario);
+        $consulta->execute();
+    }
+
+    //CAMBIA LA CONTRASEÑA DEL USUARIO BUSCANDOLO POR SU CORREO
+
+    public function cambiar_contraseña_con_correo($correo, $contraseña)
+    {
+        $consulta = $this->db->prepare('UPDATE usuario SET contraseña=:pass WHERE  correo = :correo');
+        $consulta->bindParam(':pass', $contraseña);
+        $consulta->bindParam(':correo', $correo);
         $consulta->execute();
     }
 

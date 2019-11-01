@@ -32,15 +32,15 @@ function sin_formato(input){
 
 //Agrega el formato de respuesta correcta y el atributo de accesibilidad
 function exitoso(elemento) {
-    $(elemento).css("border-bottom", "1px solid #4CAF50");
-    $(elemento).css("box-shadow", "0 1px 0 0 #4CAF50");
+    $(elemento).css("border-bottom", "1px solid #7A1F20");
+    $(elemento).css("box-shadow", "0 1px 0 0 #7A1F20");
     $(elemento).attr("aria-invalid", "false");
 }
 
 //Agrega el formato de respuesta incorrecta y el atributo de accesibilidad
 function fallido(elemento) {
-    $(elemento).css("border-bottom", "1px solid #ee6e73");
-    $(elemento).css("box-shadow", "0 1px 0 0 #ee6e73");
+    $(elemento).css("border-bottom", "1px solid #7A1F20");
+    $(elemento).css("box-shadow", "0 1px 0 0 #7A1F20");
     $(elemento).attr("aria-invalid", "true");
 }
 
@@ -53,12 +53,11 @@ function ocultar_mensaje_formulario(mensaje) {
 //Agrega el mensaje del formulario
 function mostrar_mensaje_formulario(mensaje, tipo, texto="") {
     $(mensaje).empty();
-    var html = "<div class='card-panel color lighten-1'><span class='white-text valign-wrapper'style='font-weight: bold'><i class='small material-icons icon_message'>error</i>texto</span></div>";
+    var html = "<div class='card-panel card-notification'><span class='white-text valign-wrapper bold'><i class='small material-icons icon_message mr-1'>error</i>texto</span></div>";
     var texto_error = "Existen algunos errores que deben corregirse. Asegurese de ingresar bien los datos";
     var texto_exito = "Operacion realizada exitosamente";
     var texto_advertencia = "";
     if (tipo == "error") {
-        html = html.replace("color", "red");
         if(texto != ""){
             html = html.replace("texto", texto);
         }
@@ -68,7 +67,6 @@ function mostrar_mensaje_formulario(mensaje, tipo, texto="") {
     }
     else {
         if (tipo == "exito") {
-            html = html.replace("color", "green");
             if(texto != ""){
                 html = html.replace("texto", texto);
             }
@@ -77,7 +75,6 @@ function mostrar_mensaje_formulario(mensaje, tipo, texto="") {
             }
         }
         else{
-            html = html.replace("color", "yellow");
             if(texto != ""){
                 html = html.replace("texto", texto);
             }

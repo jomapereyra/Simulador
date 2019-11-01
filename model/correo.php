@@ -19,32 +19,45 @@ class Correo
 
         $this->mail->SMTPDebug = 0;                                       // Ver el Debug del envio del mail - 0 para desactivarlo, 2 para activarlo
         $this->mail->isSMTP();                                            // Utilizo el protocolo SMTP para enviar
-        $this->mail->Host = 'smtp.office365.com';                         // Declaro el servidor de SMTP que voy a utilizar
+        //$this->mail->Host = 'smtp.office365.com';                         // Declaro el servidor de SMTP que voy a utilizar
+        $this->mail->Host = 'simulador.aulalibre.com.ar';
         $this->mail->SMTPAuth = true;                                     // Habilita la autenticacion SMTP
-        $this->mail->Username = 'jomapereyra@hotmail.com';                // Usuario SMTP (Depende del servidor utilizado)
-        $this->mail->Password = 'facil123';                               // Contraseña SMTP
+        //$this->mail->Username = 'jomapereyra@hotmail.com';                // Usuario SMTP (Depende del servidor utilizado)
+        $this->mail->Username = 'joma@simulador.aulalibre.com.ar';
+        //$this->mail->Password = 'facil123';                               // Contraseña SMTP
+        $this->mail->Password = 'KEYblock111:)';
         $this->mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-        $this->mail->Port = 587;                                          // TCP port to connect to
-        $this->mail->setFrom('jomapereyra@hotmail.com');
+        //$this->mail->Port = 587;                                          // TCP port to connect to
+        $this->mail->Port = 587;
+        //$this->mail->setFrom('jomapereyra@hotmail.com');
+        $this->mail->setFrom('joma@simulador.aulalibre.com.ar');
         $this->mail->CharSet = 'UTF-8';
     }
 
     public function enviar_activacion($correo, $usuario, $id_activacion)
     {
+        $mensaje = [
+            'enviado' => false,
+            'contenido' => '',
+        ];
         try {
-            require_once 'config.php';
+            require 'config.php';
             $this->mail->addAddress($correo);     // Agrego destinatario
 
             // Contenido
             $this->mail->isHTML(true);
             $this->mail->Subject = 'Activación de su cuenta';
             $this->mail->Body = 'Estimado usuario '.$usuario.' su cuenta fue registrada satisfactoriamente.</br> 
-            Antes de su proximo ingreso debe activarla haciendo click en el siguiente enlace: <a href='.$dns.$this->url_activacion.$id_activacion.'>Activar Cuenta</a>';
+            Antes de su proximo ingreso debe activarla haciendo click en el siguiente enlace: <a href="'.$dns.$this->url_activacion.$id_activacion.'">Activar Cuenta</a>';
             $this->mail->send();
+            $mensaje['enviado'] = true;
+            $mensaje['contenido'] = 'El mensaje fue enviado';
 
-            return 'El mensaje fue enviado';
+            return $mensaje;
         } catch (Exception $e) {
-            return "El mensaje no pudo enviarse. Mailer Error: {$mail->ErrorInfo}";
+            $mensaje['contenido'] = "El mensaje no pudo enviarse. Mailer Error: {$this->mail->ErrorInfo}";
+
+            return $mensaje;
         }
     }
 
@@ -70,7 +83,12 @@ class Correo
 
     public function enviar_codigo($correo, $usuario, $codigo)
     {
+        $mensaje = [
+            'enviado' => false,
+            'contenido' => '',
+        ];
         try {
+            require 'config.php';
             $this->mail->addAddress($correo);     // Agrego destinatario
 
             // Contenido
@@ -81,8 +99,14 @@ class Correo
             Si usted no solicito el cambio, le recomendamos que ingrese a nuestro sitio y cambie su contraseña lo antes posible.<br>
             Muchas gracias por su tiempo, que tenga un buen día';
             $this->mail->send();
+            $mensaje['enviado'] = true;
+            $mensaje['contenido'] = 'El mensaje fue enviado';
+
+            return $mensaje;
         } catch (Exception $e) {
-            echo "El mensaje no pudo enviarse. Mailer Error: {$mail->ErrorInfo}";
+            $mensaje['contenido'] = "El mensaje no pudo enviarse. Mailer Error: {$this->mail->ErrorInfo}";
+
+            return $mensaje;
         }
     }
 }

@@ -1,12 +1,10 @@
 {% extends "base_usuario.twig" %}
 
+{% block content_title %}ENTREVISTA{% endblock %}
+
 {% block content %}
 
-    <section class="col s10 offset-s1">
-
-        <h4 class="title_margin accesible" tabindex="6">Entrevista</h4>
-
-        <article class="article_margin texto_page">
+        <article>
 
             {% if completado %}
 
@@ -24,7 +22,5 @@
 
 
         </article>
-
-    </section>
 
 {% endblock %}

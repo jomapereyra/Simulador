@@ -12,11 +12,9 @@ $resultado = [
 
 require_once '../model/usuario.php';
 
+$correo_usuario = $_POST['correo'];
 $usuario = new Usuario();
-session_start();
-//En session deberia guardarme el email
-$nombre_usuario = $_SESSION['usuario'];
-$datos_usuario = $usuario->buscar_con_usuario($nombre_usuario);
+$datos_usuario = $usuario->buscar_con_correo($correo_usuario);
 $contraseña_nueva = $_POST['contraseña_nueva'];
 $comparacion = $_POST['comparacion'];
 $codigo = $_POST['codigo'];
@@ -58,7 +56,7 @@ if ($codigo != $datos_usuario['codigo']) {
 if (!in_array(true, $resultado)) {
     //Tengo que cambiar la contraseña del usuario
     $contraseña = password_hash($contraseña_nueva, PASSWORD_DEFAULT, ['cost' => 10]); //Tengo que encriptar antes de cambiarla
-    $usuario->cambiar_contraseña_con_usuario($nombre_usuario, $contraseña);
+    $usuario->cambiar_contraseña_con_correo($correo_usuario, $contraseña);
 } else {
     $resultado['fail'] = true;
 }

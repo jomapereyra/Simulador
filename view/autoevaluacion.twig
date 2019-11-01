@@ -9,111 +9,105 @@
 
 {% endblock %}
 
+{% block content_title %}AUTOEVALUACIÓN
+{% endblock %}
+
 {% block content %}
 
-    <div class="row">
-
-        <section class="col m10 s12 offset-m1 ">
-
-            <div class="col s6 left-align">
-                <a class="btn waves-effect white grey-text darken-text-2" id="last">Reanudar</a>
-            </div>
-
-        </section>
-
+    <div class="row mb-0">
+        <div class="col s6 left-align mt-1 mb-2">
+            <a class="btn waves-effect" id="last">Reanudar</a>
+        </div>
     </div>
 
-    <section class="col m10 s12 offset-m1 ">
+    <nav>
+        <div class="nav-wrapper">
+            <div class="col s12 center-align breadcrumb_settings" id="breadcrumb_autoevaluacion"></div>
+        </div>
+    </nav>
 
-        <nav>
-            <div class="nav-wrapper">
-                <div class="col s12 center-align breadcrumb_settings" id="breadcrumb_autoevaluacion"></div>
-            </div>
-        </nav>
+    <article class="mt-0"
+        id="autoevaluacion">
+
+        {# Contenido de cada panel/etapa de la autoevaluacion #}
 
         <div
-            id="autoevaluacion">
+            class="card-panel card-autoevaluacion margin_autoevaluacion" id="panel_autoevaluacion">
 
-            {# Contenido de cada panel/etapa de la autoevaluacion #}
+            {# Autoanalisis #}
 
-            <div
-                class="card-panel teal lighten-2 margin_autoevaluacion" id="panel_autoevaluacion">
+            <div class="contenido_panel actual" id="etapa_0">
+                {% include "autoevaluacion/autoanalisis.html" %}
+            </div>
 
-                {# Autoanalisis #}
+            {# Preparate para ser un ganador #}
 
-                <div class="contenido_panel actual" id="etapa_0">
-                    {% include "autoevaluacion/autoanalisis.html" %}
-                </div>
+            <div hidden class="contenido_panel" id="etapa_1"></div>
 
-                {# Preparate para ser un ganador #}
+            {# El lenguaje corporal no miente #}
 
-                <div hidden class="contenido_panel" id="etapa_1"></div>
+            <div hidden class="contenido_panel" id="etapa_2"></div>
 
-                {# El lenguaje corporal no miente #}
+            {# Tienes un minuto #}
 
-                <div hidden class="contenido_panel" id="etapa_2"></div>
+            <div hidden class="contenido_panel" id="etapa_3"></div>
 
-                {# Tienes un minuto #}
+            {# Aprendemos a negociar #}
 
-                <div hidden class="contenido_panel" id="etapa_3"></div>
+            <div hidden class="contenido_panel" id="etapa_4"></div>
 
-                {# Aprendemos a negociar #}
+            {# Repasemos #}
 
-                <div hidden class="contenido_panel" id="etapa_4"></div>
+            <div hidden class="contenido_panel" id="etapa_5"></div>
 
-                {# Repasemos #}
+            {# Llego el momento #}
 
-                <div hidden class="contenido_panel" id="etapa_5"></div>
+            <div hidden class="contenido_panel" id="etapa_6"></div>
 
-                {# Llego el momento #}
+            {# Formulario Final #}
 
-                <div hidden class="contenido_panel" id="etapa_6"></div>
+            <div hidden class="contenido_panel" id="resultado"></div>
 
-                {# Formulario Final #}
+            {# Error - faltan actividades #}
 
-                <div hidden class="contenido_panel" id="resultado"></div>
+            <div class="contenido_panel">
+                <div class="card-panel" hidden id="error_etapa"></div>
+            </div>
 
-                {# Error - faltan actividades #}
+        </article>
 
-                <div class="contenido_panel">
-                    <div class="card-panel" hidden id="error_etapa"></div>
+        <div
+            id="auto_options">
+
+            {# Progress Bar #}
+
+            <label class="right-align" for="progreso">Progreso del recorrido:<span id="mi_porcentaje">0%<span></label>
+
+                    <div class="progress" id="progreso">
+                        <div class="determinate" style="width: 0%"></div>
+                    </div>
+
+                    {# Botones para desplazarse #}
+
+                    <div class="col s6 left-align">
+                        <a class="btn waves-effect" id="prev">Anterior</a>
+                    </div>
+
+                    <div class="col s6 right-align" id="next_button">
+                        <a class="btn waves-effect" id="next">Siguiente</a>
+                    </div>
+
+                    {# Botones para finalizar #}
+
+                    <div class="col s6 right-align" id="finish_button" hidden>
+                        <a class="btn waves-effect" id="finish" onclick="finalizar();">Finalizar</a>
+                    </div>
+
+
                 </div>
 
             </div>
 
-            <div
-                class="container" id="auto_options">
-
-                {# Progress Bar #}
-
-                <label class="right-align" for="progreso">Progreso del recorrido:<span id="mi_porcentaje">0%<span></label>
-
-                        <div class="progress" id="progreso">
-                            <div class="determinate" style="width: 0%"></div>
-                        </div>
-
-                        {# Botones para desplazarse #}
-
-                        <div class="col s6 left-align">
-                            <a class="btn waves-effect white grey-text darken-text-2" id="prev">Anterior</a>
-                        </div>
-
-                        <div class="col s6 right-align" id="next_button">
-                            <a class="btn waves-effect white grey-text darken-text-2" id="next">Siguiente</a>
-                        </div>
-
-                        {# Botones para finalizar #}
-
-                        <div class="col s6 right-align" id="finish_button" hidden>
-                            <a class="btn waves-effect white grey-text darken-text-2" id="finish" onclick="finalizar();">Finalizar</a>
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            </section>
         {% endblock %}
         {% block js %}
 

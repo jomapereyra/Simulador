@@ -53,7 +53,7 @@
 
     </head>
 
-    <body>
+    <body class="grey lighten-5">
 
         {% include "header.twig" %}
 
@@ -74,7 +74,7 @@
 
         {% endif %}
 
-        <main class="row" id="content"> {% block content %}{% endblock %}
+        <main class="row m-0" id="content"> {% block main %}{% endblock %}
             </main>
 
             {% include "footer.twig" %}
