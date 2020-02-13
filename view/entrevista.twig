@@ -1,26 +1,72 @@
 {% extends "base_usuario.twig" %}
 
-{% block content_title %}ENTREVISTA{% endblock %}
+{% block content_title %}ENTREVISTA
+{% endblock %}
 
 {% block content %}
 
-        <article>
+	<article>
 
-            {% if completado %}
+		{% if completado %}
 
-                <p class="accesible" tabindex="7">
-                    Se deberia mostrar la primera parte de la entrevista
-                </p>
+			{# Raiz videos #}
 
-                {% else %}
+			<article>
 
-                <p class="accesible" tabindex="7">
-                    No puede acceder a la entrevista sin antes completar la autoevaluación
-                </p>
+				
+				{# Video #}
 
-            {% endif %}
+				<div id="video">
+					{% include "entrevista/video/video_1.html" %}
+				</div>
+
+				{# Decision #}
+
+				<div id="modal-decision" class="modal">
+					<div class="modal-content" id="decision">
+					</div>
+				</div>
+
+			</article>
+
+			{# Opciones #}
+
+			<div
+				id="options">
+
+				{# Botones para desplazarse #}
+
+				<div class="col s12 right-align px-0" id="next">
+					<a class="btn waves-effect" id="next_button">Siguiente</a>
+				</div>
+
+				{# Botones para finalizar #}
+
+				<div class="col s12 right-align px-0" id="finish" hidden>
+					<a class="btn waves-effect" id="finish_button">Finalizar</a>
+				</div>
+
+			</div>
+
+		{% else %}
+
+			<p class="accesible" tabindex="7">
+				No puede acceder a la entrevista sin antes completar la autoevaluación
+			</p>
+
+		{% endif %}
 
 
-        </article>
+	</article>
+
+{% endblock %}
+
+{% block js %}
+
+	{{ parent() }}
+
+	{# Entrevista #}
+
+	<script src="js/entrevista.js" type="text/javascript"></script>
 
 {% endblock %}

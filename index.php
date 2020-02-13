@@ -15,6 +15,24 @@ if (!isset($_SESSION['usuario'])) {
 else {
     //Si quiere ir a un punto especifico
 
+    // $request = $_SERVER['REQUEST_URI'];
+
+    // switch ($request) {
+    // case '/':
+    //     require __DIR__.'/views/index.php';
+    //     break;
+    // case '':
+    //     require __DIR__.'/views/index.php';
+    //     break;
+    // case '/about':
+    //     require __DIR__.'/views/about.php';
+    //     break;
+    // default:
+    //     http_response_code(404);
+    //     require __DIR__.'/views/404.php';
+    //     break;
+    // }
+
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
     }
@@ -47,25 +65,25 @@ else {
 
     else {
         $datos = $usuario->get_datos_sidenav($_SESSION['usuario']);
-        if ($page == 'entrevista') {
-            require_once 'model/recorrido.php';
-            $recorrido = new Recorrido();
-            $termine = $recorrido->existe_completado($datos['id_usuario']);
-            $datos += ['completado' => $termine];
-        }
     }
+
+    //Paso el nombre de la pagina y el modo de vista
 
     $datos += ['name' => $name, 'mode' => 1];
 
     //Agrego la notificacion de activacion de cuenta si es necesario
 
     $activado = $usuario->get_activado($_SESSION['usuario']);
+    $datos += ['not_activate' => !$activado];
+    
+    //Necesito saber si el usuario realizo las actividades
 
-    if (!$activado) {
-        $datos += ['not_activate' => true];
-    } else {
-        $datos += ['not_activate' => false];
-    }
+    require_once 'model/recorrido.php';
+    $recorrido = new Recorrido();
+    $termine = $recorrido->existe_completado($datos['id_usuario']);
+    $datos += ['completado' => true];
+    
+    //Renderizo la pagina
 
     echo $viewer->twig->render($page.'.twig', $datos);
 }

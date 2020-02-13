@@ -98,6 +98,37 @@ select {
     background-color: #943636a3;
 }
 
+/********************* Acceso por teclado ******************************************/
+
+a.skip-to-main-content{
+    border: 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    position: absolute;
+    color: #fff;
+    font-weight: 100;
+    text-decoration: none;
+    text-align: center;
+    background-color: #c55755 !important;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    cursor: pointer;
+    height: 0;
+    padding: 0;
+    line-height: normal;
+}
+
+/* .skip-to-main-content>.skip-to-main-content__content {
+    display: none;
+} */
+
+a.skip-to-main-content:focus {
+    border: 2px solid #992a2a;
+    height:auto;
+    padding: 8px 8px;
+}
+
 /********************* Cuerpo Pagina ***********************************************/
 
 main {
@@ -110,6 +141,54 @@ article {
     margin-top: 30px !important;
     margin-bottom: 30px !important;
     font-size: 20px;
+}
+
+
+/********************* Flecha volver para arriba **************************************/
+
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top i {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+#return-to-top:hover i {
+    color: #fff;
+    top: 5px;
 }
 
 /********************* Configuracion Responsive **************************************/
@@ -338,6 +417,86 @@ nav ul li.active {
 .my-2 {
     margin-top: 2rem !important;
     margin-bottom: 2rem !important;
+}
+
+/*********************************** Paddings *****************************/
+
+.p-0 {
+    padding: 0px !important;
+}
+
+.p-1 {
+    padding: 1rem !important;
+}
+
+.p-2 {
+    padding: 2rem !important;
+}
+
+.pr-0 {
+    padding-right: 0rem !important;
+}
+
+.pr-1 {
+    padding-right: 1rem !important;
+}
+
+.pr-2 {
+    padding-right: 2rem !important;
+}
+
+.pb-0 {
+    padding-bottom: 0rem !important;
+}
+
+.pb-1 {
+    padding-bottom: 1rem !important;
+}
+
+.pb-2 {
+    padding-bottom: 2rem !important;
+}
+
+.pt-0{
+    padding-top: 0rem !important;
+}
+
+.pt-1{
+    padding-top: 1rem !important;
+}
+
+.pt-2{
+    padding-top: 2rem !important;
+}
+
+.px-0 {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+}
+
+.px-1 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.px-2 {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+.py-0 {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+}
+
+.py-1 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.py-2 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
 }
 
 /***************************** Accesibilidad Web ***********************************/

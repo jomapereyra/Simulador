@@ -30,7 +30,7 @@ class Usuario
 
     public function get_datos($usuario)
     {
-        $consulta = $this->db->prepare('SELECT nombre,apellido,correo,ciudad_residencia,hipoacusico_nacimiento,usuario,usuario.id_nivel,usuario.id_pais,usuario.id_grado,usuario.id_tipo,nombre_pais,nombre_grado,nombre_nivel,nombre_protesis FROM usuario INNER JOIN pais ON usuario.id_pais=pais.id_pais INNER JOIN grado_hipoacusia ON usuario.id_grado=grado_hipoacusia.id_grado INNER JOIN nivel_educativo ON usuario.id_nivel=nivel_educativo.id_nivel INNER JOIN tipo_protesis ON usuario.id_tipo=tipo_protesis.id_tipo WHERE usuario=:user');
+        $consulta = $this->db->prepare('SELECT id_usuario,nombre,apellido,correo,ciudad_residencia,hipoacusico_nacimiento,usuario,usuario.id_nivel,usuario.id_pais,usuario.id_grado,usuario.id_tipo,nombre_pais,nombre_grado,nombre_nivel,nombre_protesis FROM usuario INNER JOIN pais ON usuario.id_pais=pais.id_pais INNER JOIN grado_hipoacusia ON usuario.id_grado=grado_hipoacusia.id_grado INNER JOIN nivel_educativo ON usuario.id_nivel=nivel_educativo.id_nivel INNER JOIN tipo_protesis ON usuario.id_tipo=tipo_protesis.id_tipo WHERE usuario=:user');
         $consulta->bindParam(':user', $usuario);
         $consulta->execute();
         $datos = $consulta->fetch(PDO::FETCH_ASSOC);
